@@ -51,12 +51,16 @@ body{
 .path>input {
     width:100%;
     background-color: rgb(38, 36, 36);
-    color:rgb(70, 66, 66);
+    color:rgb(124, 119, 119);
     height: 100%;
     border-style: none;
     padding: auto;
     padding-left: 15px;
     border-radius: 7px;
+}
+
+.path>input:focus{
+    outline: none;
 }
   
   .dropdown {
@@ -103,7 +107,11 @@ body{
   .mainFolders > li{
     display: flex;
     align-items: center;
+    width: 100%;
+    /* background-color: aliceblue; */
+    cursor: pointer;
   }
+
 
   .FolderInfo{
     display: flex;
@@ -127,7 +135,6 @@ body{
   .right-panel {
     padding-left: 15px;
     width: 80%;
-    overflow: scroll;
     background-color: #211f1f;
     padding-bottom: 50px;
   }
@@ -139,16 +146,19 @@ body{
     justify-content: left;
     row-gap: 25px;
     column-gap: 10px;
-    overflow: scroll;
+    height: 100%;
+    overflow-y: scroll;
+    align-content: flex-start;
   }
 
   .card{
     display: flex;
     flex-direction: column;
     max-width: 100px;
-    justify-content: center;
-    align-items: center;
+    justify-content: left;
+    align-items:start;
     padding: 15px;
+    cursor: pointer;
     /* background-color: aliceblue; */
   }
 
@@ -177,5 +187,10 @@ body{
   
   .file-list li {
     padding: 5px;
+  }
+
+  .Filenames{
+    inline-size: 80px;
+    overflow-wrap: break-word;
   }
   

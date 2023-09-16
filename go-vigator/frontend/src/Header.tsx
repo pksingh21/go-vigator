@@ -1,9 +1,14 @@
 import {useState} from 'react';
 import  FolderImg  from './assets/images/folder-svgrepo-com.svg';
 import './App.css';
+import path from 'path';
 
-function Header() {
+function Header(props: {path: string, callUpdatePath: (newPath:string) => void}) {
 
+    function updatePath(e: React.ChangeEvent<HTMLInputElement>){
+        props.callUpdatePath(e.target.value);
+    }
+    
     return (
         <div className="header">
             <div className='fbbuttons'>
@@ -11,7 +16,7 @@ function Header() {
                 <button>&gt;</button>
             </div>
             <div className='path'>
-                <input type='text' placeholder='/cur/home'></input>
+                <input type='text' placeholder={props.path} value={props.path} onChange={updatePath}></input>
             </div>
             <div className='dropdown'>
                 <select>
