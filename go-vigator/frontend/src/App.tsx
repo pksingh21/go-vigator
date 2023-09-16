@@ -1,8 +1,10 @@
 import {useState} from 'react';
-import logo from './assets/images/logo-universal.png';
+import  FolderImg  from './assets/images/folder-svgrepo-com.svg';
 import './App.css';
 import {Greet} from "../wailsjs/go/main/App";
-
+import RightPanel from './RightPanel';
+import LeftPanel from './LeftPanel';
+import Header from './Header';
 function App() {
     const [resultText, setResultText] = useState("Please enter your name below 👇");
     const [name, setName] = useState('');
@@ -15,11 +17,12 @@ function App() {
 
     return (
         <div id="App">
-            <img src={logo} id="logo" alt="logo"/>
-            <div id="result" className="result">{resultText}</div>
-            <div id="input" className="input-box">
-                <input id="name" className="input" onChange={updateName} autoComplete="off" name="input" type="text"/>
-                <button className="btn" onClick={greet}>Greet</button>
+            <div className="container">
+                <Header/>
+                <div className="content">
+                    <LeftPanel/>
+                    <RightPanel/>
+                </div>
             </div>
         </div>
     )
