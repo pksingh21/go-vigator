@@ -1,80 +1,64 @@
 import { useEffect, useState } from "react";
-import logo from "./assets/images/logo-universal.png";
-// import "./App.css";
 import { GetFiles } from "../wailsjs/go/main/App";
-import { GetCurrentDirectory } from "../wailsjs/go/main/App";
-import DisplayFolderFiles from "./DisplayFolderFiles";
-import { Spin } from "antd";
-
-import RightPanel from './RightPanel';
-import LeftPanel from './LeftPanel';
-import Header from './Header';
+import RightPanel from "./RightPanel";
+import LeftPanel from "./LeftPanel";
+import Header from "./Header";
 export interface FileCustomType {
-  isDirectory: boolean;
-  isFile: boolean;
+  IsDirectory: boolean;
+  IsFile: boolean;
   Name: string;
   Owner: string;
   Group: string;
-  latestTime: string;
-  size: string;
+  LatestTime: string;
+  Size: string;
 }
 
 function App() {
-    const [resultText, setResultText] = useState(
-        "Please enter your name below 👇"
-      );
-    const [currentPath, setCurrentPath] = useState(""); // Get current directory (initial)
-    const [files, setFiles] = useState<FileCustomType[]>([]);
-    const updateName = (e: string) => setCurrentPath(e);
-    const updateResultText = (result: string) => setResultText(result);
-    const updateFiles = (result: FileCustomType[]) =>{
-        console.log(result);
-        setFiles(result);
-    }
-    
-    function getFileInfo() {
-        GetFiles(currentPath).then(updateFiles);
-        console.log("FIles",files);
-    }
+  const [resultText, setResultText] = useState(
+    "Please enter your name below 👇"
+  );
+  const [currentPath, setCurrentPath] = useState(""); // Get current directory (initial)
+  const [files, setFiles] = useState<FileCustomType[]>([]);
+  const updateName = (e: string) => setCurrentPath(e);
+  const updateResultText = (result: string) => setResultText(result);
+  const updateFiles = (result: FileCustomType[]) => {
+    console.log(result, "result");
+    setFiles(result);
+  };
 
-    function UpdatePath(newPath:string){
-      console.log("Path : ",newPath);
-      setCurrentPath(newPath);
-      getFileInfo();
-    }
+  function getFileInfo() {
+    GetFiles(currentPath).then((result) => updateFiles(result));
+  }
 
-    useEffect(() => {
-      // GetCurrentDirectory().then(updateName);
-      updateName("/home/ankit/");
-    }, []);
-    useEffect(() => {
-      getFileInfo();
-    }, [currentPath]);
+  function UpdatePath(newPath: string) {
+    setCurrentPath(newPath);
+    getFileInfo();
+  }
 
-    console.log("Out files",files,currentPath)
+  useEffect(() => {
+    // GetCurrentDirectory().then(updateName);
+    updateName("/home/pks/");
+  }, []);
+  useEffect(() => {
+    getFileInfo();
+  }, [currentPath]);
 
-
-    return (
-        <div id="App">
-            <div className="container">
-                <Header path={currentPath} callUpdatePath={UpdatePath}/>
-                <div className="content">
-                    <LeftPanel callUpdatePath={UpdatePath}/>
-                    <RightPanel files={files} currentPath={currentPath} callUpdatePath={UpdatePath} />
-                </div>
-            </div>
+  console.log("all files", files);
+  return (
+    <div id="App">
+      <div className="container">
+        <Header path={currentPath} callUpdatePath={UpdatePath} />
+        <div className="content">
+          <LeftPanel callUpdatePath={UpdatePath} />
+          <RightPanel
+            files={files}
+            currentPath={currentPath}
+            callUpdatePath={UpdatePath}
+          />
         </div>
-    )
-
-    // return (
-    //     <div id="App">
-    //       {files ? (
-    //         <DisplayFolderFiles files={files} currentPath={currentPath} />
-    //       ) : (
-    //         <Spin />
-    //       )}
-    //     </div>
-    //   );
+      </div>
+    </div>
+  );
 }
 
 export default App;

@@ -4,6 +4,6 @@ import {main} from '../models';
 
 export function GetCurrentDirectory():Promise<string>;
 
-export function GetFiles(arg1:string):Promise<Array<main.File>>;
+export function GetFiles(arg1:string):Promise<Array<main.CustomFile>>;
 
 export function Greet(arg1:string):Promise<string>;

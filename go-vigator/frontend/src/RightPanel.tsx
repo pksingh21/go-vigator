@@ -37,16 +37,14 @@ function RightPanel(props: DisplayFolderFilesProps) {
     // })
     
     function GotoFolder(e: any){
-        console.log("New Path : ",e.target.id);
         props.callUpdatePath(props.currentPath+'/'+e.target.id);
     }
-
 
     return (
         <div className="right-panel">
             <div className="FolderInfo">
                 <div>{props.files && props.files.length} Folders</div>
-                <div>Size 5Mb</div>
+                {/* <div>Size {props.files[0].size}</div> */}
             </div>
             <div className="file-list">
                 {props.files && props.files.map(item => {

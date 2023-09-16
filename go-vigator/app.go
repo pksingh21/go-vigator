@@ -26,16 +26,16 @@ func (a *App) startup(ctx context.Context) {
 
 // Greet returns a greeting for the given name
 
-type File struct {
-	isDirectory bool
-	isFile      bool
+type CustomFile struct {
+	IsDirectory bool
+	IsFile      bool
 	Name        string
 	Owner       string
 	Group       string
 	// add a time field for last modified
 	// add a size field for size of file
-	latestTime string
-	size       string
+	LatestTime string
+	Size       string
 }
 
 func convertiKBorMB(size int64) string {
@@ -50,8 +50,8 @@ func convertiKBorMB(size int64) string {
 		return fmt.Sprint(size) + "B"
 	}
 }
-func GetFilesAndDirectories(path string) []File {
-	var filesAndDirectories []File
+func GetFilesAndDirectories(path string) []CustomFile {
+	var filesAndDirectories []CustomFile
 	fileInfos, err := os.ReadDir(path)
 	if err != nil {
 		return nil
@@ -66,14 +66,14 @@ func GetFilesAndDirectories(path string) []File {
 		uuid_string := fmt.Sprint(uuid)
 		userName, _ := user.LookupId(uuid_string)
 		groupName, _ := user.LookupGroupId(fmt.Sprint(extraFileInfo.Sys().(*syscall.Stat_t).Gid))
-		file := File{
-			isDirectory: fileInfo.IsDir(),
-			isFile:      !fileInfo.IsDir(),
+		file := CustomFile{
+			IsDirectory: fileInfo.IsDir(),
+			IsFile:      !fileInfo.IsDir(),
 			Name:        fileInfo.Name(),
 			Owner:       userName.Name,
 			Group:       groupName.Name,
-			latestTime:  extraFileInfo.ModTime().String(),
-			size:        convertiKBorMB(extraFileInfo.Size()),
+			LatestTime:  extraFileInfo.ModTime().String(),
+			Size:        convertiKBorMB(extraFileInfo.Size()),
 		}
 		filesAndDirectories = append(filesAndDirectories, file)
 	}
@@ -85,8 +85,9 @@ func (a *App) Greet(name string) string {
 	return fmt.Sprintf("Hello %s, It's show time!", name)
 }
 
-func (a *App) GetFiles(path string) []File {
-	return GetFilesAndDirectories(path)
+func (a *App) GetFiles(path string) []CustomFile {
+	var allFiles =  GetFilesAndDirectories(path)
+	return allFiles
 }
 
 func (a *App) GetCurrentDirectory() string {
