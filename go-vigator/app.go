@@ -88,3 +88,8 @@ func (a *App) Greet(name string) string {
 func (a *App) GetFiles(path string) []File {
 	return GetFilesAndDirectories(path)
 }
+
+func (a *App) GetCurrentDirectory() string {
+	currentDirectory, _ := os.Getwd()
+	return currentDirectory
+}
