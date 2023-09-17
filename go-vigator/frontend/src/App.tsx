@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { GetFiles } from "../wailsjs/go/main/App";
+import { GetFiles, PushToHistory } from "../wailsjs/go/main/App";
 import RightPanel from "./RightPanel";
 import LeftPanel from "./LeftPanel";
 import Header from "./Header";
@@ -32,18 +32,18 @@ function App() {
 
   function UpdatePath(newPath: string) {
     setCurrentPath(newPath);
-    getFileInfo();
+    // getFileInfo();
   }
 
   useEffect(() => {
     // GetCurrentDirectory().then(updateName);
     updateName("/home/pks/");
+    PushToHistory("/home/pks/");
   }, []);
   useEffect(() => {
     getFileInfo();
   }, [currentPath]);
 
-  console.log("all files", files);
   return (
     <div id="App">
       <div className="container">

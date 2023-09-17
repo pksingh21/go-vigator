@@ -10,6 +10,18 @@ export function GetFiles(arg1) {
   return window['go']['main']['App']['GetFiles'](arg1);
 }
 
-export function Greet(arg1) {
-  return window['go']['main']['App']['Greet'](arg1);
+export function GoBackward() {
+  return window['go']['main']['App']['GoBackward']();
+}
+
+export function GoForward() {
+  return window['go']['main']['App']['GoForward']();
+}
+
+export function OpenFile(arg1) {
+  return window['go']['main']['App']['OpenFile'](arg1);
+}
+
+export function PushToHistory(arg1) {
+  return window['go']['main']['App']['PushToHistory'](arg1);
 }

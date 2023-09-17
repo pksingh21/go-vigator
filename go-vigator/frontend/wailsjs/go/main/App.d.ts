@@ -6,4 +6,10 @@ export function GetCurrentDirectory():Promise<string>;
 
 export function GetFiles(arg1:string):Promise<Array<main.CustomFile>>;
 
-export function Greet(arg1:string):Promise<string>;
+export function GoBackward():Promise<string>;
+
+export function GoForward():Promise<string>;
+
+export function OpenFile(arg1:string):Promise<void>;
+
+export function PushToHistory(arg1:string):Promise<void>;
