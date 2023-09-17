@@ -66,7 +66,7 @@ func (a *App) OpenFile(filePath string) error {
 		cmd = exec.Command("xdg-open", filePath)
 	case "windows":
 		// Windows
-		cmd = exec.Command("start", filePath)
+		cmd = exec.Command("cmd.exe", "/C", "start", filePath)
 	default:
 		return fmt.Errorf("unsupported operating system")
 	}
