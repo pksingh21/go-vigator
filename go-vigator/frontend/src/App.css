@@ -1,59 +1,196 @@
-#app {
+*{
+    margin:0px;
+    padding:0px;
+    /* background-color: ; */
+}
+
+body{
     height: 100vh;
-    text-align: center;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
 }
 
-#logo {
-    display: block;
-    width: 50%;
-    height: 50%;
-    margin: auto;
-    padding: 10% 0 0;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-origin: content-box;
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    background-color: #211f1f;
+  }
+  
+  .header {
+    background-color: #211f1f;
+    padding: 10px;
+    display: flex;
+  }
+
+
+.fbbuttons {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
-.result {
-    height: 20px;
-    line-height: 20px;
-    margin: 1.5rem auto;
+.fbbuttons>button {
+    width: 45%;
+    height:100%;
+    margin: 0%;
+    background-color: rgb(38, 36, 36);
+    border-style: none;
+    border-radius: 7px;
+    color: white;
+    
+}
+  
+.path {
+    flex-grow: 15;
+    overflow-x: hidden;
 }
 
-.input-box .btn {
-    width: 60px;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 3px;
-    border: none;
-    margin: 0 0 0 20px;
-    padding: 0 8px;
-    cursor: pointer;
+.path>input {
+    width:100%;
+    background-color: rgb(38, 36, 36);
+    color:rgb(124, 119, 119);
+    height: 100%;
+    border-style: none;
+    padding: auto;
+    padding-left: 15px;
+    border-radius: 7px;
 }
 
-.input-box .btn:hover {
-    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
-    color: #333333;
-}
-
-.input-box .input {
-    border: none;
-    border-radius: 3px;
+.path>input:focus{
     outline: none;
-    height: 30px;
-    line-height: 30px;
-    padding: 0 10px;
-    background-color: rgba(240, 240, 240, 1);
-    -webkit-font-smoothing: antialiased;
 }
+  
+  .dropdown {
+    flex-grow: 1;
+  }
+  .dropdown>select {
+    width: 90%;
+    height: 100%;
+    background-color: rgb(38, 36, 36);
+    
+  }
+  .dropdown > select>option{
+    background-color: rgb(38, 36, 36);
+  }
 
-.input-box .input:hover {
-    border: none;
-    background-color: rgba(255, 255, 255, 1);
-}
+  select {
+    background-color: black !important;
+  }
+  
+  .content {
+    /* height: 500px; */
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+  
 
-.input-box .input:focus {
-    border: none;
-    background-color: rgba(255, 255, 255, 1);
-}
+
+  ul{
+      list-style: none;
+      padding: 0;
+      margin: 0;;
+    }
+    
+    .left-panel {
+      width: 200px;
+      background-color: rgb(38, 36, 36);
+      overflow: scroll;
+      padding-bottom: 50px;
+  }
+
+  .mainFolders > li{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    /* background-color: aliceblue; */
+    cursor: pointer;
+  }
+
+
+  .FolderInfo{
+    display: flex;
+    font-size: smaller;
+    justify-content: left;
+    column-gap: 15px;
+  }
+
+
+  .mainFolders :hover{
+     background-color: rgb(61, 60, 60);
+  }
+
+  .leftPanelIcon{
+    margin: auto;
+    width: 20px;
+    margin-left: 5px;
+    margin-right: 15px;
+  }  
+  
+  .right-panel {
+    padding-left: 15px;
+    width: 80%;
+    background-color: #211f1f;
+    padding-bottom: 50px;
+  }
+  
+  .file-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    justify-content: left;
+    row-gap: 25px;
+    column-gap: 10px;
+    height: 100%;
+    overflow-y: scroll;
+    align-content: flex-start;
+  }
+
+  .card{
+    display: flex;
+    flex-direction: column;
+    max-width: 100px;
+    justify-content: left;
+    align-items:start;
+    padding: 15px;
+    cursor: pointer;
+    /* background-color: aliceblue; */
+  }
+
+  .card:hover{
+    background-color: rgb(61, 60, 60);
+  }
+
+  .rightPanelIcon{
+      width: 80px;
+  }
+
+  a{
+      text-decoration: none;
+      color: white;
+  }
+  
+  .breadcrumb {
+    margin-bottom: 10px;
+  }
+  
+  .file-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .file-list li {
+    padding: 5px;
+  }
+
+  .Filenames{
+    inline-size: 80px;
+    overflow-wrap: break-word;
+  }
+  
