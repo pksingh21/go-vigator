@@ -37,8 +37,8 @@ function App() {
 
   useEffect(() => {
     // GetCurrentDirectory().then(updateName);
-    updateName("/home/pks/");
-    PushToHistory("/home/pks/");
+    updateName("C:/");
+    PushToHistory("C:/");
   }, []);
   useEffect(() => {
     getFileInfo();

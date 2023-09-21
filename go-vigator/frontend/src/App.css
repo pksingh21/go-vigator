@@ -1,196 +1,248 @@
-*{
-    margin:0px;
-    padding:0px;
-    /* background-color: ; */
+* {
+  margin: 0px;
+  padding: 0px;
+  /* background-color: ; */
 }
 
-body{
-    height: 100vh;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
+body {
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
 }
 
 
 .container {
-    width: 100vw;
-    height: 100vh;
-    background-color: #211f1f;
-  }
-  
-  .header {
-    background-color: #211f1f;
-    padding: 10px;
-    display: flex;
-  }
+  width: 100vw;
+  height: 100vh;
+  background-color: #211f1f;
+}
+
+.header {
+  background-color: #211f1f;
+  padding: 10px;
+  display: flex;
+}
 
 
 .fbbuttons {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .fbbuttons>button {
-    width: 45%;
-    height:100%;
-    margin: 0%;
-    background-color: rgb(38, 36, 36);
-    border-style: none;
-    border-radius: 7px;
-    color: white;
-    
+  width: 45%;
+  height: 100%;
+  margin: 0%;
+  background-color: rgb(38, 36, 36);
+  border-style: none;
+  border-radius: 7px;
+  color: white;
+
 }
-  
+
 .path {
-    flex-grow: 15;
-    overflow-x: hidden;
+  flex-grow: 15;
+  overflow-x: hidden;
 }
 
 .path>input {
-    width:100%;
-    background-color: rgb(38, 36, 36);
-    color:rgb(124, 119, 119);
-    height: 100%;
-    border-style: none;
-    padding: auto;
-    padding-left: 15px;
-    border-radius: 7px;
+  width: 100%;
+  background-color: rgb(38, 36, 36);
+  color: rgb(124, 119, 119);
+  height: 100%;
+  border-style: none;
+  padding: auto;
+  padding-left: 15px;
+  border-radius: 7px;
 }
 
-.path>input:focus{
-    outline: none;
+.path>input:focus {
+  outline: none;
 }
-  
-  .dropdown {
-    flex-grow: 1;
-  }
-  .dropdown>select {
-    width: 90%;
-    height: 100%;
-    background-color: rgb(38, 36, 36);
-    
-  }
-  .dropdown > select>option{
-    background-color: rgb(38, 36, 36);
-  }
 
-  select {
-    background-color: black !important;
-  }
-  
-  .content {
-    /* height: 500px; */
-    padding-left: 10px;
-    padding-right: 10px;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-  }
-  
+.dropdown {
+  flex-grow: 1;
+}
 
+.dropdown>select {
+  width: 90%;
+  height: 100%;
+  background-color: rgb(38, 36, 36);
 
-  ul{
-      list-style: none;
-      padding: 0;
-      margin: 0;;
-    }
-    
-    .left-panel {
-      width: 200px;
-      background-color: rgb(38, 36, 36);
-      overflow: scroll;
-      padding-bottom: 50px;
-  }
+}
 
-  .mainFolders > li{
-    display: flex;
-    align-items: center;
-    width: 100%;
-    /* background-color: aliceblue; */
-    cursor: pointer;
-  }
+.dropdown>select>option {
+  background-color: rgb(38, 36, 36);
+}
+
+select {
+  background-color: black !important;
+}
+
+.content {
+  /* height: 500px; */
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
 
 
-  .FolderInfo{
-    display: flex;
-    font-size: smaller;
-    justify-content: left;
-    column-gap: 15px;
-  }
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  ;
+}
+
+.left-panel {
+  width: 200px;
+  background-color: rgb(38, 36, 36);
+  overflow: scroll;
+  padding-bottom: 50px;
+}
+
+.mainFolders>li {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  /* background-color: aliceblue; */
+  cursor: pointer;
+}
 
 
-  .mainFolders :hover{
-     background-color: rgb(61, 60, 60);
+.FolderInfo {
+  display: flex;
+  font-size: smaller;
+  justify-content: left;
+  column-gap: 15px;
+}
+
+
+.mainFolders :hover {
+  background-color: rgb(61, 60, 60);
+}
+
+.leftPanelIcon {
+  margin: auto;
+  width: 20px;
+  margin-left: 5px;
+  margin-right: 15px;
+}
+
+.right-panel {
+  padding-left: 15px;
+  width: 80%;
+  background-color: #211f1f;
+  padding-bottom: 50px;
+}
+
+.file-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: left;
+  row-gap: 25px;
+  column-gap: 10px;
+  height: 100%;
+  overflow-y: scroll;
+  align-content: flex-start;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  max-width: 100px;
+  justify-content: left;
+  align-items: start;
+  padding: 15px;
+  cursor: pointer;
+  /* background-color: aliceblue; */
+}
+
+.card:hover {
+  background-color: rgb(61, 60, 60);
+}
+
+.rightPanelIcon {
+  width: 80px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.breadcrumb {
+  margin-bottom: 10px;
+}
+
+.file-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.file-list li {
+  padding: 5px;
+}
+
+.Filenames {
+  inline-size: 80px;
+  overflow-wrap: break-word;
+}
+
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.contextmenu {
+  position: absolute;
+  width: 215px;
+  display: flex;
+  flex-direction: column;
+  /* padding: 5px 0px; */
+  border-radius: 1rem;
+  animation: open 0.3s;
+  transform-origin: top left;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: saturate(103%) blur(5px);
+  overflow: hidden;
+}
+
+.contextmenu button {
+  background: none;
+  padding: 1rem;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.contextmenu button:hover {
+  background: rgba(167, 167, 167, 0.29);
+  backdrop-filter: saturate(103%) blur(5px);
+  /* border-radius: 0.5rem; */
+}
+
+
+.contextmenu i {
+  margin-right: 1rem;
+}
+
+@keyframes open {
+  from {
+    transform: scale(0);
   }
 
-  .leftPanelIcon{
-    margin: auto;
-    width: 20px;
-    margin-left: 5px;
-    margin-right: 15px;
-  }  
-  
-  .right-panel {
-    padding-left: 15px;
-    width: 80%;
-    background-color: #211f1f;
-    padding-bottom: 50px;
+  to {
+    transform: scale(1);
   }
-  
-  .file-list{
-    display: flex;
-    flex-direction: row;
-    flex-wrap:wrap;
-    justify-content: left;
-    row-gap: 25px;
-    column-gap: 10px;
-    height: 100%;
-    overflow-y: scroll;
-    align-content: flex-start;
-  }
-
-  .card{
-    display: flex;
-    flex-direction: column;
-    max-width: 100px;
-    justify-content: left;
-    align-items:start;
-    padding: 15px;
-    cursor: pointer;
-    /* background-color: aliceblue; */
-  }
-
-  .card:hover{
-    background-color: rgb(61, 60, 60);
-  }
-
-  .rightPanelIcon{
-      width: 80px;
-  }
-
-  a{
-      text-decoration: none;
-      color: white;
-  }
-  
-  .breadcrumb {
-    margin-bottom: 10px;
-  }
-  
-  .file-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .file-list li {
-    padding: 5px;
-  }
-
-  .Filenames{
-    inline-size: 80px;
-    overflow-wrap: break-word;
-  }
-  
+}

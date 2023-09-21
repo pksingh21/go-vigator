@@ -1,12 +1,14 @@
 package main
+
 import (
 	"fmt"
 	"os/exec"
 	"runtime"
-	"syscall"
-	"os/user"
+
+	// "syscall"
 	"os"
 )
+
 func convertiKBorMB(size int64) string {
 	// function to convert the given 64 byte size to KB or MB and add KB or MB to the end of the size
 	// if size is less than 1024 then return size + KB
@@ -20,7 +22,6 @@ func convertiKBorMB(size int64) string {
 	}
 }
 
-
 func GetFilesAndDirectories(path string) []CustomFile {
 	var filesAndDirectories []CustomFile
 	fileInfos, err := os.ReadDir(path)
@@ -33,18 +34,18 @@ func GetFilesAndDirectories(path string) []CustomFile {
 			continue
 		}
 		extraFileInfo, _ := os.Stat(path + "/" + fileInfo.Name())
-		uuid := extraFileInfo.Sys().(*syscall.Stat_t).Uid
-		uuid_string := fmt.Sprint(uuid)
-		userName, _ := user.LookupId(uuid_string)
-		groupName, _ := user.LookupGroupId(fmt.Sprint(extraFileInfo.Sys().(*syscall.Stat_t).Gid))
+		// uuid := extraFileInfo.Sys().(*syscall.Stat_t).Uid
+		// uuid_string := fmt.Sprint(uuid)
+		// userName, _ := user.LookupId(uuid_string)
+		// groupName, _ := user.LookupGroupId(fmt.Sprint(extraFileInfo.Sys().(*syscall.Stat_t).Gid))
 		file := CustomFile{
 			IsDirectory: fileInfo.IsDir(),
 			IsFile:      !fileInfo.IsDir(),
 			Name:        fileInfo.Name(),
-			Owner:       userName.Name,
-			Group:       groupName.Name,
-			LatestTime:  extraFileInfo.ModTime().String(),
-			Size:        convertiKBorMB(extraFileInfo.Size()),
+			// Owner:       userName.Name,
+			// Group:       groupName.Name,
+			LatestTime: extraFileInfo.ModTime().String(),
+			Size:       convertiKBorMB(extraFileInfo.Size()),
 		}
 		filesAndDirectories = append(filesAndDirectories, file)
 	}
@@ -52,11 +53,12 @@ func GetFilesAndDirectories(path string) []CustomFile {
 	return filesAndDirectories
 }
 
-
 func (a *App) OpenFile(filePath string) error {
-	// exec handled by OS and not by a separate go routine or thread 
+	// exec handled by OS and not by a separate go routine or thread
 	// it is async as well so we can add a cursor rotation if we want while it is opening
+	fmt.Println(filePath)
 	var cmd *exec.Cmd
+	// cmd = exec.Command("start", filePath)
 	switch runtime.GOOS {
 	case "darwin":
 		// macOS
@@ -66,7 +68,7 @@ func (a *App) OpenFile(filePath string) error {
 		cmd = exec.Command("xdg-open", filePath)
 	case "windows":
 		// Windows
-		cmd = exec.Command("start", filePath)
+		cmd = exec.Command("cmd.exe", "/C", "start", filePath)
 	default:
 		return fmt.Errorf("unsupported operating system")
 	}

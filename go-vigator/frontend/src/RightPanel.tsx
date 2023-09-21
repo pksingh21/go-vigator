@@ -6,7 +6,7 @@ import PdfImg from "./assets/images/pdf-svgrepo-com.svg";
 import "./App.css";
 import { FileCustomType } from "./App";
 import { OpenFile, PushToHistory } from "../wailsjs/go/main/App";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 interface DisplayFolderFilesProps {
   files: FileCustomType[];
   currentPath: string;
@@ -35,9 +35,6 @@ function FolderImage(props: { filename: string }) {
 }
 
 function RightPanel(props: DisplayFolderFilesProps) {
-  // props.files.map((item)=>{
-  //     console.log(item.size)
-  // })
 
   function OperationOnFileOrDirectory(currentName: string, file: boolean) {
     const fullPath = props.currentPath + currentName + "/";
@@ -60,9 +57,36 @@ function RightPanel(props: DisplayFolderFilesProps) {
 
     return input.substring(0, truncatedLength) + ellipsis;
   }
+
   const [name, setName] = useState("");
+  const [vis, setVis] = useState(false);
+  // const cntMenuRef = useRef(null);
+  const [lPosition, setLPosition] = useState(0);
+  const [tPosition, setTPosition] = useState(0);
+  const closeContextMenu = (e: any) => {
+    // if (e.target === contextMenu) return;
+    // body.removeChild(contextMenu);
+    setVis(false);
+  };
+
+  const openContextMenu = (e: any) => {
+    e.preventDefault();
+
+    setLPosition(e.clientX)
+    setTPosition(e.clientY)
+
+    // body.appendChild(contextMenu);
+    setVis(true)
+    window.addEventListener("click", closeContextMenu);
+  };
+
   return (
-    <div className="right-panel">
+    <div className="right-panel" onContextMenu={openContextMenu}>
+      {vis && <div className="contextmenu" style={{ left: `${lPosition}px`, top: `${tPosition}px` }}>
+        <button><i className="fa-solid fa-share"></i>Share</button>
+        <button><i className="fa-solid fa-scissors"></i>Cut</button>
+        <button><i className="fa-solid fa-copy"></i>Copy</button>
+        <button><i className="fa-solid fa-paste"></i>Paste</button></div>}
       <div className="FolderInfo">
         <div>{props.files && props.files.length} Folders</div>
         {/* <div>Size {props.files[0].size}</div> */}

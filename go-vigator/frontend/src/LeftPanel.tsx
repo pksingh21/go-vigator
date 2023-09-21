@@ -4,8 +4,8 @@ import "./App.css";
 
 function LeftPanel(props: { callUpdatePath: (e: string) => void }) {
   function UpdatePath(path: string) {
-    if (path == "Home") props.callUpdatePath("/home/pks/");
-    else props.callUpdatePath("/home/pks/" + path);
+    if (path == "Home") props.callUpdatePath("C:/");
+    else props.callUpdatePath("C:/" + path);
   }
   const leftPanelElement = [
     "Home",
