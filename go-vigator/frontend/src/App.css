@@ -4,6 +4,10 @@
   /* background-color: ; */
 }
 
+input:focus {
+  border-style: none;
+}
+
 body {
   height: 100vh;
   padding: 0;
@@ -15,18 +19,18 @@ body {
 .container {
   width: 100vw;
   height: 100vh;
-  background-color: #211f1f;
+  background-color: #191919;
 }
 
 .header {
-  background-color: #211f1f;
+  background-color: #191919;
   padding: 10px;
   display: flex;
 }
 
 
 .fbbuttons {
-  flex-grow: 1;
+  width: 7%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -36,7 +40,7 @@ body {
   width: 45%;
   height: 100%;
   margin: 0%;
-  background-color: rgb(38, 36, 36);
+  background-color: #272727;
   border-style: none;
   border-radius: 7px;
   color: white;
@@ -44,15 +48,15 @@ body {
 }
 
 .path {
-  flex-grow: 15;
+  width: 82%;
   overflow-x: hidden;
 }
 
 .path>input {
-  width: 100%;
-  background-color: rgb(38, 36, 36);
+  width: 95%;
+  background-color: #272727;
   color: rgb(124, 119, 119);
-  height: 100%;
+  height: 2.3em;
   border-style: none;
   padding: auto;
   padding-left: 15px;
@@ -64,18 +68,32 @@ body {
 }
 
 .dropdown {
-  flex-grow: 1;
+  width: 11%;
+  border-radius: 5px;
 }
+
+.dropdown>input {
+  background: #272727;
+  border-style: none;
+  color: white;
+  height: 100%;
+  margin: 0;
+  padding-left: 9px;
+  text-align: left;
+  border-radius: 5px;
+}
+
+
 
 .dropdown>select {
   width: 90%;
   height: 100%;
-  background-color: rgb(38, 36, 36);
+  background-color: #2f2a2f;
 
 }
 
 .dropdown>select>option {
-  background-color: rgb(38, 36, 36);
+  background-color: #2f2a2f;
 }
 
 select {
@@ -84,8 +102,6 @@ select {
 
 .content {
   /* height: 500px; */
-  padding-left: 10px;
-  padding-right: 10px;
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -97,20 +113,24 @@ ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  ;
+  padding-left: 8px;
+  padding-top: 9px;
 }
 
 .left-panel {
   width: 200px;
-  background-color: rgb(38, 36, 36);
-  overflow: scroll;
+  font-size: small;
+  background-color: #191919;
+  overflow-x: auto;
   padding-bottom: 50px;
+  border-right: 1px solid rgba(255, 255, 255, 0.623);
 }
 
 .mainFolders>li {
   display: flex;
   align-items: center;
   width: 100%;
+  margin: 7px 0px;
   /* background-color: aliceblue; */
   cursor: pointer;
 }
@@ -125,7 +145,7 @@ ul {
 
 
 .mainFolders :hover {
-  background-color: rgb(61, 60, 60);
+  /* background-color: #272727; */
 }
 
 .leftPanelIcon {
@@ -136,13 +156,15 @@ ul {
 }
 
 .right-panel {
+  font-size: 14px;
   padding-left: 15px;
-  width: 80%;
-  background-color: #211f1f;
+  width: 86%;
+  background-color: #191919;
   padding-bottom: 50px;
 }
 
 .file-list {
+  font-size: 14px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -158,19 +180,21 @@ ul {
   display: flex;
   flex-direction: column;
   max-width: 100px;
-  justify-content: left;
-  align-items: start;
-  padding: 15px;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
   cursor: pointer;
   /* background-color: aliceblue; */
 }
 
 .card:hover {
-  background-color: rgb(61, 60, 60);
+  background-color: #272727;
+  border-radius: 5px;
 }
 
 .rightPanelIcon {
-  width: 80px;
+  width: 65px;
+  opacity: 0.95;
 }
 
 a {
@@ -193,8 +217,9 @@ a {
 }
 
 .Filenames {
-  inline-size: 80px;
+  inline-size: 93px;
   overflow-wrap: break-word;
+  margin-top: 8px;
 }
 
 
@@ -205,25 +230,25 @@ a {
 
 .contextmenu {
   position: absolute;
-  width: 215px;
+  width: 205px;
   display: flex;
   flex-direction: column;
-  /* padding: 5px 0px; */
   border-radius: 1rem;
   animation: open 0.3s;
   transform-origin: top left;
-  background: rgba(0, 0, 0, 0.8);
+  background: #272727c2;
   backdrop-filter: saturate(103%) blur(5px);
   overflow: hidden;
 }
 
 .contextmenu button {
   background: none;
-  padding: 1rem;
+  padding: 8px;
   border: none;
   text-align: left;
   cursor: pointer;
   color: #ffffff;
+  border-bottom: 1px solid #2e2d2d;
 }
 
 .contextmenu button:hover {
@@ -245,4 +270,59 @@ a {
   to {
     transform: scale(1);
   }
+}
+
+.dialogModal {
+  margin: auto;
+}
+
+.dialogModal>form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+.dialogModal>form>input {
+  padding: 5px 15px;
+}
+
+.labelModal {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 17px;
+}
+
+.dialogModal {
+  padding: 2% 3%;
+  border-style: none;
+  border-radius: 7px;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: saturate(103%) blur(5px);
+  color: #ffffff;
+}
+
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgb(0, 0, 0);
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #2c2c2c;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #2c2c2c;
 }

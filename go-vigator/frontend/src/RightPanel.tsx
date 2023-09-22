@@ -1,4 +1,4 @@
-import FolderImg from "./assets/images/folder-svgrepo-com.svg";
+import FolderImg from "./assets/images/windows11-folder-default.svg";
 ("");
 import JpgImg from "./assets/images/jpg-svgrepo-com.svg";
 import TxtImg from "./assets/images/txt-svgrepo-com.svg";
@@ -63,30 +63,64 @@ function RightPanel(props: DisplayFolderFilesProps) {
   // const cntMenuRef = useRef(null);
   const [lPosition, setLPosition] = useState(0);
   const [tPosition, setTPosition] = useState(0);
+  const [openedModal, setOpenedModal] = useState(false);
+
+
+  useEffect(() => {
+    if (openedModal) {
+      dialogModal.current?.showModal();
+    } else {
+      console.log("ran ")
+      dialogModal.current?.close();
+    }
+  }, [openedModal])
+
   const closeContextMenu = (e: any) => {
-    // if (e.target === contextMenu) return;
-    // body.removeChild(contextMenu);
+    e.stopPropagation();
+    if (e.target.className == "contextMenuClick")
+      setOpenedModal(true);
+    console.log("Clicked  : ", e)
     setVis(false);
   };
 
+  const closeModal = (e: any) => {
+    e.preventDefault();
+    console.log("close kar bhai ")
+    setOpenedModal(false);
+  }
+
   const openContextMenu = (e: any) => {
     e.preventDefault();
-
+    e.stopPropagation();
     setLPosition(e.clientX)
     setTPosition(e.clientY)
 
     // body.appendChild(contextMenu);
     setVis(true)
-    window.addEventListener("click", closeContextMenu);
   };
 
+  // if (vis) {
+  //   window.addEventListener("click", closeContextMenu);
+  // }
+
+  const dialogModal: any = useRef(null);
+
   return (
-    <div className="right-panel" onContextMenu={openContextMenu}>
+    <div className="right-panel" onContextMenu={openContextMenu} onClick={closeContextMenu}>
+      {openedModal && <dialog className="dialogModal" ref={dialogModal}>
+        <form style={{ display: "flex" }}>
+          <div className="labelModal">
+            <div>Filename</div>
+            <div onClick={closeModal}>X</div>
+          </div>
+          <input type="text" id="FileName"></input>
+        </form>
+      </dialog>}
       {vis && <div className="contextmenu" style={{ left: `${lPosition}px`, top: `${tPosition}px` }}>
-        <button><i className="fa-solid fa-share"></i>Share</button>
-        <button><i className="fa-solid fa-scissors"></i>Cut</button>
-        <button><i className="fa-solid fa-copy"></i>Copy</button>
-        <button><i className="fa-solid fa-paste"></i>Paste</button></div>}
+        <button className="contextMenuClick" onClick={closeContextMenu}><i className="fa-solid fa-share"></i>New File</button>
+        <button className="contextMenuClick" onClick={closeContextMenu}><i className="fa-solid fa-share"></i>New Folder</button>
+        <button className="contextMenuClick" onClick={closeContextMenu}><i className="fa-solid fa-scissors"></i>Refresh</button>
+      </div>}
       <div className="FolderInfo">
         <div>{props.files && props.files.length} Folders</div>
         {/* <div>Size {props.files[0].size}</div> */}
@@ -109,7 +143,7 @@ function RightPanel(props: DisplayFolderFilesProps) {
               >
                 <FolderImage filename={item.Name} />
                 <p id={item.Name} className="Filenames">
-                  {shortenLongString(item.Name, 10)}
+                  {shortenLongString(item.Name, 11)}
                 </p>
               </div>
             );

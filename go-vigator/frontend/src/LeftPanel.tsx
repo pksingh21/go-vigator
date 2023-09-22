@@ -1,5 +1,5 @@
 import { MouseEventHandler, useState } from "react";
-import FolderImg from "./assets/images/folder-svgrepo-com.svg";
+import FolderImg from "./assets/images/windows11-folder-default.svg";
 import "./App.css";
 
 function LeftPanel(props: { callUpdatePath: (e: string) => void }) {
@@ -22,6 +22,7 @@ function LeftPanel(props: { callUpdatePath: (e: string) => void }) {
         {leftPanelElement.map((element, index) => {
           return (
             <li
+              key={element}
               onClick={(e) => {
                 e.preventDefault();
                 UpdatePath(element);
