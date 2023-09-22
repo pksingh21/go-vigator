@@ -1,8 +1,10 @@
 import FolderImg from "./assets/images/windows11-folder-default.svg";
 ("");
-import JpgImg from "./assets/images/jpg-svgrepo-com.svg";
-import TxtImg from "./assets/images/txt-svgrepo-com.svg";
-import PdfImg from "./assets/images/pdf-svgrepo-com.svg";
+import JpgImg from "./assets/images/photo.png";
+import TxtImg from "./assets/images/txt.png";
+import PdfImg from "./assets/images/pdf.png";
+import ExeImg from "./assets/images/exe.png";
+
 import "./App.css";
 import { FileCustomType } from "./App";
 import { OpenFile, PushToHistory } from "../wailsjs/go/main/App";
@@ -27,6 +29,11 @@ function FolderImage(props: { filename: string }) {
   if (props.filename.includes(".pdf")) {
     return (
       <img src={PdfImg} id={props.filename} className="rightPanelIcon"></img>
+    );
+  }
+  if (props.filename.includes(".exe")) {
+    return (
+      <img src={ExeImg} id={props.filename} className="rightPanelIcon"></img>
     );
   }
   return (

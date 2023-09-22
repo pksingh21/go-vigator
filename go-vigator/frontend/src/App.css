@@ -229,6 +229,7 @@ a {
 }
 
 .contextmenu {
+  z-index: 2;
   position: absolute;
   width: 205px;
   display: flex;
