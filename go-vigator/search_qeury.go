@@ -4,11 +4,10 @@ import (
 	"compress/gzip"
 	"encoding/gob"
 	"fmt"
-	"os"
-	"sort"
-
 	"github.com/lithammer/fuzzysearch/fuzzy"
 	"github.com/pksingh21/go-vigator/filesystemsearch"
+	"os"
+	"sort"
 )
 
 func ExecuteSearchQuery(query string) (fuzzy.Ranks, error) {
@@ -18,9 +17,11 @@ func ExecuteSearchQuery(query string) (fuzzy.Ranks, error) {
 	if err != nil {
 		fmt.Println("Error opening file:", err)
 		rootFolde := filesystemsearch.BuildTree()
+		fmt.Println("building tree done")
 		rootFolder = rootFolde
 	}
 	defer file.Close()
+	file, _ = os.Open("treeNew1.bin.gz")
 	gzipReader, err := gzip.NewReader(file)
 	if err != nil {
 		fmt.Println("Error reading file:", err)
@@ -34,7 +35,9 @@ func ExecuteSearchQuery(query string) (fuzzy.Ranks, error) {
 		return fuzzy.Ranks{}, err
 	}
 	go filesystemsearch.Watch(rootFolder)
+	filesystemsearch.Path = []string{}
 	rootFolder.String("")
+	fmt.Println("Path Array built with length ", len(filesystemsearch.Path))
 	wordx := fuzzy.RankFindFold(query, filesystemsearch.Path)
 	sort.Sort(wordx)
 	if len(wordx) > 50 {

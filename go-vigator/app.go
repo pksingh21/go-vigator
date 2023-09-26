@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/pksingh21/go-vigator/filesystemsearch"
 	"os"
 
 	"github.com/lithammer/fuzzysearch/fuzzy"
@@ -72,4 +73,7 @@ func (a *App) GetFiles(path string) []CustomFile {
 
 func (a *App) ExecuteSearchQueryWrapper(path string) (fuzzy.Ranks, error) {
 	return ExecuteSearchQuery(path)
+}
+func (a *App) WriteToDisk(ctx context.Context) {
+	filesystemsearch.OnExit()
 }

@@ -37,7 +37,7 @@ func walkFunc(path string, info os.FileInfo, err error) error {
 }
 
 func updateTree(rootNode *Folder) {
-	logFilePath := "/home/pks/My Stuff 2.0/Coding/go/FileSystemChangx.log"
+	logFilePath := "C:\\Users\\DELL\\Desktop\\go-vigator\\go-vigator\\filesystemsearch\\FileSystemChanges.log"
 	file, err := os.OpenFile(logFilePath, os.O_RDWR, 0644)
 	if err != nil {
 		log.Fatal(err)
@@ -164,8 +164,8 @@ func contains(slice []string, str string) bool {
 func Watch(rootNode *Folder) {
 	// check if FifleSystemChanges.log exists and if it's not zero then call the updateTree function
 	fmt.Println(os.Getwd())
-	logFilePath := "/home/pks/My Stuff 2.0/Coding/go/FileSystemChangx.log"
-	fmt.Println(logFilePath)
+	//logFilePath := "./filesystemsearch/FileSystemChangx.log"
+	logFilePath := "C:\\Users\\DELL\\Desktop\\go-vigator\\go-vigator\\filesystemsearch\\FileSystemChanges.log"
 	fileInfo, err := os.Stat(logFilePath)
 	if err != nil {
 		log.Fatal(err)
