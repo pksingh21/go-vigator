@@ -3,6 +3,12 @@
 import {fuzzy} from '../models';
 import {main} from '../models';
 
+export function CreateNewFile(arg1:string,arg2:string):Promise<boolean>;
+
+export function CreateNewFolder(arg1:string,arg2:string):Promise<boolean>;
+
+export function DeleteFolder(arg1:string,arg2:string):Promise<boolean>;
+
 export function ExecuteSearchQueryWrapper(arg1:string):Promise<fuzzy.Ranks>;
 
 export function GetCurrentDirectory():Promise<string>;

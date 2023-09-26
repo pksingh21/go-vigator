@@ -171,7 +171,7 @@ ul {
   justify-content: left;
   row-gap: 25px;
   column-gap: 10px;
-  height: 100%;
+  height: 97%;
   overflow-y: scroll;
   align-content: flex-start;
 }
