@@ -21,7 +21,9 @@ func ExecuteSearchQuery(query string) (fuzzy.Ranks, error) {
 		rootFolder = rootFolde
 	}
 	defer file.Close()
-	gzipReader, err := gzip.NewReader(file)
+	file2, _ := os.Open("treeNew1.bin.gz")
+	defer file2.Close()
+	gzipReader, err := gzip.NewReader(file2)
 	if err != nil {
 		fmt.Println("Error reading file:", err)
 		return fuzzy.Ranks{}, err
@@ -37,8 +39,8 @@ func ExecuteSearchQuery(query string) (fuzzy.Ranks, error) {
 	rootFolder.String("")
 	wordx := fuzzy.RankFindFold(query, filesystemsearch.Path)
 	sort.Sort(wordx)
-	if len(wordx) > 50 {
-		wordx = wordx[:50]
+	if len(wordx) > 200 {
+		wordx = wordx[:200]
 	}
 	return wordx, nil
 }
