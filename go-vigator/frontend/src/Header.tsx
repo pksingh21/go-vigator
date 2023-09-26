@@ -60,7 +60,7 @@ function Header(props: {
               .catch((err) => window.alert(err))
           }
           onChange={(e) => setSearchQuery(e.target.value)}
-        />
+        />  
       </div>
     </div>
   );
