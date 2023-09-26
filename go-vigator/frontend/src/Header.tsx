@@ -50,7 +50,7 @@ function Header(props: {
           onChange={updatePath}
         ></input>
       </div>
-      <div className="dropdown">
+      <div className="search">
         <input type="text"
           onSubmit={() =>
             ExecuteSearchQueryWrapper(searchQuery)
@@ -60,7 +60,7 @@ function Header(props: {
               .catch((err) => window.alert(err))
           }
           onChange={(e) => setSearchQuery(e.target.value)}
-        />  
+        />
       </div>
     </div>
   );

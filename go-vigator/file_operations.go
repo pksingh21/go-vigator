@@ -5,6 +5,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
+	"strings"
 
 	// "syscall"
 	"os"
@@ -55,11 +56,9 @@ func GetFilesAndDirectories(path string) []CustomFile {
 }
 
 func (a *App) OpenFile(filePath string) error {
-	// exec handled by OS and not by a separate go routine or thread
-	// it is async as well so we can add a cursor rotation if we want while it is opening
 	fmt.Println(filePath)
 	var cmd *exec.Cmd
-	// cmd = exec.Command("start", filePath)
+
 	switch runtime.GOOS {
 	case "darwin":
 		// macOS
@@ -69,7 +68,9 @@ func (a *App) OpenFile(filePath string) error {
 		cmd = exec.Command("xdg-open", filePath)
 	case "windows":
 		// Windows
-		cmd = exec.Command("cmd.exe", "/C", "start", filePath)
+		filePath = strings.TrimRight(filePath, "\\") // Remove trailing backslashes
+		fmt.Println("\"" + filePath + "\"")
+		cmd = exec.Command("cmd.exe", "/C", "start", "cmd", "/C", "start", "call", "\""+filePath+"\"")
 	default:
 		return fmt.Errorf("unsupported operating system")
 	}
