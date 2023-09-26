@@ -2,7 +2,12 @@ import { useState } from "react";
 import FolderImg from "./assets/images/folder-svgrepo-com.svg";
 import "./App.css";
 import path from "path";
-import { GoBackward, GoForward } from "../wailsjs/go/main/App";
+import {
+  GoBackward,
+  GoForward,
+  ExecuteSearchQueryWrapper,
+} from "../wailsjs/go/main/App";
+import Search from "antd/es/input/Search";
 function Header(props: {
   path: string;
   callUpdatePath: (newPath: string) => void;
@@ -46,14 +51,24 @@ function Header(props: {
         ></input>
       </div>
       <div className="dropdown">
-        <input
+        {/* <input
           type="text"
           placeholder="Search"
           onChange={(e) => {
             setSearchQuery(e.target.value);
           }}
           value={searchQuery}
-        ></input>
+        ></input> */}
+        <Search
+          onPressEnter={() =>
+            ExecuteSearchQueryWrapper(searchQuery)
+              .then((result) => {
+                console.log(result,"search results");
+              })
+              .catch((err) => window.alert(err))
+          }
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
       </div>
     </div>
   );

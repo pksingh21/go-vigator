@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 	"os"
+
+	"github.com/lithammer/fuzzysearch/fuzzy"
 )
 
 // App struct
@@ -68,4 +70,6 @@ func (a *App) GetFiles(path string) []CustomFile {
 	return GetFilesAndDirectories(path)
 }
 
-
+func (a *App) ExecuteSearchQueryWrapper(path string) (fuzzy.Ranks, error) {
+	return ExecuteSearchQuery(path)
+}
