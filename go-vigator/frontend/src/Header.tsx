@@ -28,7 +28,7 @@ function Header(props: {
               .catch((err) => window.alert(err));
           }}
         >
-          &lt;
+          &#8592;
         </button>
         <button
           onClick={() => {
@@ -39,7 +39,7 @@ function Header(props: {
               .catch((err) => window.alert(err));
           }}
         >
-          &gt;
+          &#8594;
         </button>
       </div>
       <div className="path">
@@ -51,24 +51,16 @@ function Header(props: {
         ></input>
       </div>
       <div className="dropdown">
-        {/* <input
-          type="text"
-          placeholder="Search"
-          onChange={(e) => {
-            setSearchQuery(e.target.value);
-          }}
-          value={searchQuery}
-        ></input> */}
-        <Search
-          onPressEnter={() =>
+        <input type="text"
+          onSubmit={() =>
             ExecuteSearchQueryWrapper(searchQuery)
               .then((result) => {
-                console.log(result,"search results");
+                console.log(result, "search results");
               })
               .catch((err) => window.alert(err))
           }
           onChange={(e) => setSearchQuery(e.target.value)}
-        />
+        />  
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os/exec"
+	"path/filepath"
 	"runtime"
 
 	// "syscall"
@@ -79,4 +80,64 @@ func (a *App) OpenFile(filePath string) error {
 	}
 
 	return nil
+}
+
+func (a *App) DeleteFolder(path string, folderName string) bool {
+	// Construct the full path to the folder to be deleted
+	folderPath := filepath.Join(path, folderName)
+
+	// Use os.RemoveAll to delete the folder and its contents
+	err := os.RemoveAll(folderPath)
+	if err != nil {
+		// Handle the error, e.g., log it or return false
+		return false
+	}
+
+	// Folder deletion was successful
+	return true
+}
+
+func (a *App) CreateNewFolder(path string, folderName string) bool {
+	// Create the full path by combining the provided path and folder name
+	fullPath := filepath.Join(path, folderName)
+
+	// Check if the folder already exists
+	if _, err := os.Stat(fullPath); os.IsNotExist(err) {
+		// Folder does not exist, so create it
+		err := os.MkdirAll(fullPath, os.ModePerm)
+		if err != nil {
+			fmt.Printf("Error creating folder: %v\n", err)
+			return false
+		}
+		fmt.Printf("Folder '%s' created successfully at '%s'\n", folderName, fullPath)
+		return true
+	} else if err != nil {
+		fmt.Printf("Error checking folder: %v\n", err)
+		return false
+	} else {
+		fmt.Printf("Folder '%s' already exists at '%s'\n", folderName, fullPath)
+		return false
+	}
+}
+
+func (a *App) CreateNewFile(path, fileName string) bool {
+	// Ensure the path exists, create it if it doesn't
+	if err := os.MkdirAll(path, os.ModePerm); err != nil {
+		// Handle the error if needed
+		return false
+	}
+
+	// Join the path and file name to get the complete file path
+	filePath := filepath.Join(path, fileName)
+
+	// Create a new file
+	file, err := os.Create(filePath)
+	if err != nil {
+		// Handle the error if needed
+		return false
+	}
+	defer file.Close()
+
+	// File created successfully
+	return true
 }

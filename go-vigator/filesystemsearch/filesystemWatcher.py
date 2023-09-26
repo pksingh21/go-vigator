@@ -10,21 +10,24 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
         # Set the patterns for PatternMatchingEventHandler
         watchdog.events.PatternMatchingEventHandler.__init__(
             self,
-            patterns=["*.*","FileSystemChanges.log"],
+            patterns=["*.*","FileSystemChangx.log"],
             ignore_directories=True,
             case_sensitive=False,
         )
-        self.logger = logging.getLogger('FileSystemChanges')
+        self.logger = logging.getLogger('FileSystemChangx')
         self.logger.setLevel(logging.INFO)
-        log_file_path = '/home/pks/My Stuff 2.0/Coding/go/FileSystemChangx.log'
+        log_file_path = 'FileSystemChangx.log'
+        print(log_file_path)
         handler = logging.FileHandler(log_file_path)
         handler.setFormatter(logging.Formatter('%(asctime)s - %(message)s'))
         self.logger.addHandler(handler)
 
     def on_any_event(self, event):
         # if the event contains a hidden directory in path then ignore it
-        if "/." in event.src_path:
+        
+        if "\\." in event.src_path or "AppData" in event.src_path :
             return
+        print(event)
         if event.event_type=='moved':
             self.logger.info("moved$src_path$=$[%s]$to$dest_path$=$[%s] ",event.src_path,event.dest_path)
         elif event.event_type=='created':
@@ -34,7 +37,8 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
         return
 
 if __name__ == "__main__":
-    path = sys.argv[1] if len(sys.argv) > 1 else "/home"
+    path = sys.argv[1] if len(sys.argv) > 1 else "C:\\Users\\Ankit"
+   
     event_handler = Handler()
     observer = watchdog.observers.Observer()
     observer.schedule(event_handler, path=path, recursive=True)

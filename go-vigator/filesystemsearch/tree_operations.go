@@ -146,7 +146,7 @@ func BuildTree() *Folder {
 		return nil
 	}
 
-	err := cwalk.Walk("/", visit)
+	err := cwalk.Walk("C:/", visit)
 	if err != nil {
 		fmt.Println(err)
 	}
