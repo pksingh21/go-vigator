@@ -4,6 +4,7 @@ import (
 	// "bufio"
 	"bufio"
 	"fmt"
+
 	// "path/filepath"
 
 	// "compress/gzip"
@@ -164,7 +165,6 @@ func contains(slice []string, str string) bool {
 func Watch(rootNode *Folder) {
 	// check if FifleSystemChanges.log exists and if it's not zero then call the updateTree function
 	fmt.Println(os.Getwd())
-	//logFilePath := "./filesystemsearch/FileSystemChangx.log"
 	logFilePath := "C:\\Users\\DELL\\Desktop\\go-vigator\\go-vigator\\filesystemsearch\\FileSystemChanges.log"
 	fileInfo, err := os.Stat(logFilePath)
 	if err != nil {
@@ -193,7 +193,7 @@ func Watch(rootNode *Folder) {
 			if !ok {
 				return
 			}
-			if event.Name == "FileSystemChanges.log" && event.Op&fsnotify.Write == fsnotify.Write {
+			if event.Name == "FileSystemChangx.log" && event.Op&fsnotify.Write == fsnotify.Write {
 				fileInfo, err := os.Stat(logFilePath)
 				if err != nil {
 					log.Fatal(err)

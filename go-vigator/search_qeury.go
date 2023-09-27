@@ -40,8 +40,8 @@ func ExecuteSearchQuery(query string) (fuzzy.Ranks, error) {
 	fmt.Println("Path Array built with length ", len(filesystemsearch.Path))
 	wordx := fuzzy.RankFindFold(query, filesystemsearch.Path)
 	sort.Sort(wordx)
-	if len(wordx) > 50 {
-		wordx = wordx[:50]
+	if len(wordx) > 200 {
+		wordx = wordx[:200]
 	}
 	return wordx, nil
 }

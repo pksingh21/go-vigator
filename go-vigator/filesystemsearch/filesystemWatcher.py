@@ -9,11 +9,11 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
         # Set the patterns for PatternMatchingEventHandler
         watchdog.events.PatternMatchingEventHandler.__init__(
             self,
-            patterns=["*.*","FileSystemChanges.log"],
+            patterns=["*.*","FileSystemChangx.log"],
             ignore_directories=True,
             case_sensitive=False,
         )
-        self.logger = logging.getLogger('FileSystemChanges')
+        self.logger = logging.getLogger('FileSystemChangx')
         self.logger.setLevel(logging.INFO)
         log_file_path = 'FileSystemChanges.log'
         handler = logging.FileHandler(log_file_path)
@@ -22,7 +22,8 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
 
     def on_any_event(self, event):
         # if the event contains a hidden directory in path then ignore it
-        if "/." in event.src_path:
+        
+        if "\\." in event.src_path or "AppData" in event.src_path :
             return
         if "\\." in event.src_path or "AppData" in event.src_path :
             return

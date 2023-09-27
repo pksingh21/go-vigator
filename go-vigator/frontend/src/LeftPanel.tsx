@@ -1,5 +1,13 @@
 import { MouseEventHandler, useState } from "react";
 import FolderImg from "./assets/images/windows11-folder-default.svg";
+import DownloadImg from "./assets/images/Downloads.ico";
+import DesktopImg from "./assets/images/Desktop.ico";
+import MusicImg from "./assets/images/Music.ico";
+import VidoesImg from "./assets/images/Videos.ico";
+import PictureImg from "./assets/images/Photos.ico";
+import DocumentsImg from "./assets/images/Documents.ico";
+
+
 import "./App.css";
 
 function LeftPanel(props: { callUpdatePath: (e: string) => void }) {
@@ -16,6 +24,32 @@ function LeftPanel(props: { callUpdatePath: (e: string) => void }) {
     "Pictures",
     "Desktop",
   ];
+
+  function IconFetch(name: string) {
+    if (name == "Downloads") {
+      return DownloadImg;
+    }
+    if (name == "Home") {
+      return DesktopImg
+    }
+    if (name == "Music") {
+      return MusicImg;
+    }
+    if (name == "Pictures") {
+      return PictureImg;
+    }
+    if (name == "Desktop") {
+      return DesktopImg;
+    }
+    if (name == "Documents") {
+      return DocumentsImg;
+    }
+    if (name == "Videos") {
+      return VidoesImg
+    }
+
+  }
+
   return (
     <div className="left-panel">
       <ul className="mainFolders">
@@ -28,7 +62,7 @@ function LeftPanel(props: { callUpdatePath: (e: string) => void }) {
                 UpdatePath(element);
               }}
             >
-              <img src={FolderImg} className="leftPanelIcon"></img>
+              <img src={IconFetch(element)} className="leftPanelIcon"></img>
               {element}
             </li>
           );

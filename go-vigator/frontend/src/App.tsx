@@ -51,6 +51,7 @@ function App() {
         <div className="content">
           <LeftPanel callUpdatePath={UpdatePath} />
           <RightPanel
+            getFileInfo={getFileInfo}
             files={files}
             currentPath={currentPath}
             callUpdatePath={UpdatePath}
