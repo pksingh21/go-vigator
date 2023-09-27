@@ -4,13 +4,16 @@ import (
 	"compress/gzip"
 	"encoding/gob"
 	"fmt"
+	"os"
+	"path/filepath"
+	"sort"
+	"strings"
+
 	"github.com/lithammer/fuzzysearch/fuzzy"
 	"github.com/pksingh21/go-vigator/filesystemsearch"
-	"os"
-	"sort"
 )
 
-func ExecuteSearchQuery(query string) (fuzzy.Ranks, error) {
+func ExecuteSearchQuery(query string, path string) (fuzzy.Ranks, error) {
 	// open the treeNew1.bin.gz file
 	var rootFolder *filesystemsearch.Folder
 	file, err := os.Open("treeNew1.bin.gz")
@@ -34,11 +37,26 @@ func ExecuteSearchQuery(query string) (fuzzy.Ranks, error) {
 		fmt.Println("Error decoding binary data")
 		return fuzzy.Ranks{}, err
 	}
+
+	segments := strings.Split(path, string(filepath.Separator))
+	fmt.Println(segments)
+
+	for i, segment := range segments {
+		if i >= 1 && len(segment) > 0 {
+			fmt.Println(segment)
+			rootFolder = rootFolder.Folders[segment]
+		}
+	}
+	// rootFolder = rootFolder.Folders["Users"].Folders["Ankit"].Folders["Downloads"]
+	// fmt.Println(rootFolder.Files)
+	// rootFolder = rootFolder.Folders["Users"].Folders["Ankit"].Folders["Downloads"]
+	// fmt.Println(rootFolder.Folders)
+
 	go filesystemsearch.Watch(rootFolder)
 	filesystemsearch.Path = []string{}
-	rootFolder.String("")
-	fmt.Println("Path Array built with length ", len(filesystemsearch.Path))
+	rootFolder.String("", 0)
 	wordx := fuzzy.RankFindFold(query, filesystemsearch.Path)
+	fmt.Println("Path Array built with length ", len(filesystemsearch.Path))
 	sort.Sort(wordx)
 	if len(wordx) > 200 {
 		wordx = wordx[:200]

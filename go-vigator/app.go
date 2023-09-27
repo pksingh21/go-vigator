@@ -3,9 +3,10 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/pksingh21/go-vigator/filesystemsearch"
 	"os"
 	"os/user"
+
+	"github.com/pksingh21/go-vigator/filesystemsearch"
 
 	"github.com/lithammer/fuzzysearch/fuzzy"
 )
@@ -73,10 +74,12 @@ func (a *App) GetFiles(path string) []CustomFile {
 	return GetFilesAndDirectories(path)
 }
 
-func (a *App) ExecuteSearchQueryWrapper(path string) (fuzzy.Ranks, error) {
-	return ExecuteSearchQuery(path)
+func (a *App) ExecuteSearchQueryWrapper(path string, filepath string) (fuzzy.Ranks, error) {
+	return ExecuteSearchQuery(path, filepath)
 }
-<<<<<<< HEAD
+func (a *App) WriteToDisk(ctx context.Context) {
+	filesystemsearch.OnExit()
+}
 
 func (a *App) GetUser() string {
 	userName, err := user.Current()
@@ -86,8 +89,4 @@ func (a *App) GetUser() string {
 
 	fmt.Println(userName.HomeDir)
 	return userName.HomeDir
-=======
-func (a *App) WriteToDisk(ctx context.Context) {
-	filesystemsearch.OnExit()
->>>>>>> refs/remotes/origin/main
 }

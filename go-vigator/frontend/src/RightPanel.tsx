@@ -146,7 +146,7 @@ function RightPanel(props: DisplayFolderFilesProps) {
                 key={item.Name}
                 className="card"
               >
-                <FolderImage filename={item.Name} />
+                <FolderImage className="" filename={item.Name} />
                 <p id={item.Name} className="Filenames">
                   {shortenLongString(item.Name, 11)}
                 </p>

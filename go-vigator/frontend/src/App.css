@@ -80,7 +80,13 @@ body {
   border-radius: 5px;
 }
 
-.search>input {
+.search>form {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+.search>form>input {
   background: #272727;
   border-style: none;
   color: white;
@@ -99,11 +105,9 @@ body {
   box-sizing: border-box;
   flex: 0.98;
   overflow-y: scroll;
-  background-color: aliceblue;
   display: flex;
   flex-direction: row;
 }
-
 
 
 ul {
@@ -149,6 +153,8 @@ ul {
   margin-right: 15px;
 }
 
+
+
 .right-panel {
   font-size: 14px;
   padding-left: 15px;
@@ -156,6 +162,7 @@ ul {
   height: 100%;
   background-color: #191919;
 }
+
 
 .file-list {
   font-size: 14px;
@@ -321,4 +328,63 @@ a {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #2c2c2c;
+}
+
+
+.Right {
+  padding-left: 15px;
+  padding-right: 15px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+
+}
+
+.RightSearch {
+  overflow-y: auto;
+}
+
+.close {
+  display: flex;
+  justify-content: end;
+  justify-content: space-between;
+}
+
+.close>div {
+  display: flex;
+  flex-direction: row;
+}
+
+.close>div>div {
+  font-size: smaller;
+  padding: 5.5px 20px;
+  text-align: center;
+}
+
+.close>button {
+  padding: 5.5px 20px;
+  border-style: none;
+  border-radius: 5px;
+  background-color: #272727;
+  color: white;
+}
+
+.fileRow {
+  column-gap: 13px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 7px;
+  border-radius: 7px;
+}
+
+.fileRow:hover {
+  background-color: #272727;
+}
+
+.serachFileIcon {
+  width: 40px;
 }

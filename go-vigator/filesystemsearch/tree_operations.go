@@ -80,15 +80,19 @@ func (f *Folder) addFile(path []string) {
 	}
 }
 
-func (f *Folder) String(init string) error {
+func (f *Folder) String(init string, i int) error {
 	for _, file := range f.Files {
-		Path = append(Path, init+string(filepath.Separator)+f.Name+string(filepath.Separator)+file)
+		if i == 0 {
+			Path = append(Path, init+string(filepath.Separator)+file)
+		} else {
+			Path = append(Path, init+string(filepath.Separator)+f.Name+string(filepath.Separator)+file)
+		}
 	}
 	for _, folder := range f.Folders {
-		if len(f.Name) > 0 {
-			folder.String(init + string(filepath.Separator) + f.Name)
+		if len(f.Name) > 0 && i > 0 {
+			folder.String(init+string(filepath.Separator)+f.Name, 1)
 		} else {
-			folder.String(init)
+			folder.String(init, 1)
 		}
 	}
 	return nil

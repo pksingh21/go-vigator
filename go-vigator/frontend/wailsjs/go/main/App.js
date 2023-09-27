@@ -14,8 +14,8 @@ export function DeleteFolder(arg1, arg2) {
   return window['go']['main']['App']['DeleteFolder'](arg1, arg2);
 }
 
-export function ExecuteSearchQueryWrapper(arg1) {
-  return window['go']['main']['App']['ExecuteSearchQueryWrapper'](arg1);
+export function ExecuteSearchQueryWrapper(arg1, arg2) {
+  return window['go']['main']['App']['ExecuteSearchQueryWrapper'](arg1, arg2);
 }
 
 export function GetCurrentDirectory() {

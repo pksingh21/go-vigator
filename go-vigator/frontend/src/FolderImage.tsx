@@ -7,39 +7,39 @@ import RarImg from "./assets/images/rar-icon.png"
 import VidImg from "./assets/images/video-icon.png"
 import WinImg from "./assets/images/winrar.svg"
 
-function FolderImage(props: { filename: string }) {
-  if (props.filename.includes(".png") || props.filename.includes(".jpg")) {
+function FolderImage(props: { filename: string, className: string }) {
+  if (props.filename.includes(".png") || props.filename.includes(".jpg") || props.filename.includes(".jpeg")) {
     return (
-      <img src={JpgImg} id={props.filename} className="rightPanelIcon"></img>
+      <img src={JpgImg} id={props.filename} className={"rightPanelIcon " + props.className}></img>
     );
   }
   if (props.filename.includes(".zip") || props.filename.includes(".rar")) {
     return (
-      <img src={WinImg} id={props.filename} className="rightPanelIcon"></img>
+      <img src={WinImg} id={props.filename} className={"rightPanelIcon " + props.className}></img>
     );
   }
   if (props.filename.includes(".avi") || props.filename.includes(".mp4")) {
     return (
-      <img src={VidImg} id={props.filename} className="rightPanelIcon"></img>
+      <img src={VidImg} id={props.filename} className={"rightPanelIcon " + props.className}></img>
     );
   }
   if (props.filename.includes(".txt") || props.filename[0] == ".") {
     return (
-      <img src={TxtImg} id={props.filename} className="rightPanelIcon"></img>
+      <img src={TxtImg} id={props.filename} className={"rightPanelIcon " + props.className}></img>
     );
   }
   if (props.filename.includes(".pdf")) {
     return (
-      <img src={PdfImg} id={props.filename} className="rightPanelIcon"></img>
+      <img src={PdfImg} id={props.filename} className={"rightPanelIcon " + props.className}></img>
     );
   }
   if (props.filename.includes(".exe")) {
     return (
-      <img src={ExeImg} id={props.filename} className="rightPanelIcon"></img>
+      <img src={ExeImg} id={props.filename} className={"rightPanelIcon " + props.className}></img>
     );
   }
   return (
-    <img src={FolderImg} id={props.filename} className="rightPanelIcon"></img>
+    <img src={FolderImg} id={props.filename} className={"rightPanelIcon " + props.className}></img>
   );
 }
 
