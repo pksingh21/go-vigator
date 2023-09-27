@@ -51,16 +51,18 @@ function Header(props: {
         ></input>
       </div>
       <div className="dropdown">
-        <input type="text"
-          onSubmit={() =>
+        <form
+          onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
             ExecuteSearchQueryWrapper(searchQuery)
               .then((result) => {
                 console.log(result, "search results");
               })
-              .catch((err) => window.alert(err))
-          }
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />  
+              .catch((err) => window.alert(err));
+          }}
+        >
+          <input type="text" onChange={(e) => setSearchQuery(e.target.value)} />
+        </form>
       </div>
     </div>
   );

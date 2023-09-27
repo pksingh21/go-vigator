@@ -36,7 +36,7 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
         return
 
 if __name__ == "__main__":
-    root_path = os.environ.get('ROOT_PATH', 'C:\\Users\\DELL')
+    root_path = os.environ.get('ROOT_PATH', 'C:\\')
     print(root_path)
     path = sys.argv[1] if len(sys.argv) > 1 else root_path
     event_handler = Handler()
