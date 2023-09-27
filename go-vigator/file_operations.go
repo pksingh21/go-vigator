@@ -26,6 +26,7 @@ func convertiKBorMB(size int64) string {
 
 func GetFilesAndDirectories(path string) []CustomFile {
 	var filesAndDirectories []CustomFile
+	// fmt.Println(path)
 	fileInfos, err := os.ReadDir(path)
 	if err != nil {
 		return nil
@@ -35,11 +36,16 @@ func GetFilesAndDirectories(path string) []CustomFile {
 		if fileInfo.Name() == "." || fileInfo.Name() == ".." {
 			continue
 		}
-		extraFileInfo, _ := os.Stat(path + "/" + fileInfo.Name())
+		extraFileInfo, err1 := os.Stat(path + string(filepath.Separator) + fileInfo.Name())
+		// fmt.Println("error1", err1)
 		// uuid := extraFileInfo.Sys().(*syscall.Stat_t).Uid
 		// uuid_string := fmt.Sprint(uuid)
 		// userName, _ := user.LookupId(uuid_string)
 		// groupName, _ := user.LookupGroupId(fmt.Sprint(extraFileInfo.Sys().(*syscall.Stat_t).Gid))
+		// fmt.Println("printed ", extraFileInfo)
+		if err1 != nil {
+			continue
+		}
 		file := CustomFile{
 			IsDirectory: fileInfo.IsDir(),
 			IsFile:      !fileInfo.IsDir(),
@@ -49,6 +55,7 @@ func GetFilesAndDirectories(path string) []CustomFile {
 			LatestTime: extraFileInfo.ModTime().String(),
 			Size:       convertiKBorMB(extraFileInfo.Size()),
 		}
+
 		filesAndDirectories = append(filesAndDirectories, file)
 	}
 
@@ -56,7 +63,7 @@ func GetFilesAndDirectories(path string) []CustomFile {
 }
 
 func (a *App) OpenFile(filePath string) error {
-	fmt.Println(filePath)
+	// fmt.Println(filePath," file path")
 	var cmd *exec.Cmd
 
 	switch runtime.GOOS {
@@ -68,15 +75,20 @@ func (a *App) OpenFile(filePath string) error {
 		cmd = exec.Command("xdg-open", filePath)
 	case "windows":
 		// Windows
-		filePath = strings.TrimRight(filePath, "\\") // Remove trailing backslashes
-		fmt.Println("\"" + filePath + "\"")
-		cmd = exec.Command("cmd.exe", "/C", "start", "cmd", "/C", "start", "call", "\""+filePath+"\"")
+		filePath = strings.TrimRight(filePath, "/") // Remove trailing backslashes
+		// filePath = "'" + filePath + "'"
+		// fmt.Println(filePath, "formatted file path")
+
+		// ok := "C:\\Users\\Ankit\\Downloads\\20CS01058_A3-document.pdf"
+		ok1 := strings.ReplaceAll(filePath, "/", "\\")
+		// fmt.Println(ok, ok1, "lmao")
+		cmd = exec.Command("cmd.exe", "/c", ok1)
 	default:
 		return fmt.Errorf("unsupported operating system")
 	}
 
-	// Execute the command to open the file.
 	if err := cmd.Run(); err != nil {
+		fmt.Println(err, "something went wrong trying to open the file")
 		return err
 	}
 
