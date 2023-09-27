@@ -4,7 +4,6 @@ import time
 import sys
 import logging
 import os
-
 class Handler(watchdog.events.PatternMatchingEventHandler):
     def __init__(self):
         # Set the patterns for PatternMatchingEventHandler
@@ -16,8 +15,7 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
         )
         self.logger = logging.getLogger('FileSystemChangx')
         self.logger.setLevel(logging.INFO)
-        log_file_path = 'FileSystemChangx.log'
-        print(log_file_path)
+        log_file_path = 'FileSystemChanges.log'
         handler = logging.FileHandler(log_file_path)
         handler.setFormatter(logging.Formatter('%(asctime)s - %(message)s'))
         self.logger.addHandler(handler)
@@ -27,7 +25,8 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
         
         if "\\." in event.src_path or "AppData" in event.src_path :
             return
-        print(event)
+        if "\\." in event.src_path or "AppData" in event.src_path :
+            return
         if event.event_type=='moved':
             self.logger.info("moved$src_path$=$[%s]$to$dest_path$=$[%s] ",event.src_path,event.dest_path)
         elif event.event_type=='created':
@@ -37,8 +36,9 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
         return
 
 if __name__ == "__main__":
-    path = sys.argv[1] if len(sys.argv) > 1 else "C:\\Users\\Ankit"
-   
+    root_path = os.environ.get('ROOT_PATH', 'C:\\')
+    print(root_path)
+    path = sys.argv[1] if len(sys.argv) > 1 else root_path
     event_handler = Handler()
     observer = watchdog.observers.Observer()
     observer.schedule(event_handler, path=path, recursive=True)

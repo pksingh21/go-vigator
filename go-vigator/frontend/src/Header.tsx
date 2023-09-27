@@ -50,17 +50,19 @@ function Header(props: {
           onChange={updatePath}
         ></input>
       </div>
-      <div className="search">
-        <input type="text"
-          onSubmit={() =>
+      <div className="dropdown">
+        <form
+          onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
             ExecuteSearchQueryWrapper(searchQuery)
               .then((result) => {
                 console.log(result, "search results");
               })
-              .catch((err) => window.alert(err))
-          }
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
+              .catch((err) => window.alert(err));
+          }}
+        >
+          <input type="text" onChange={(e) => setSearchQuery(e.target.value)} />
+        </form>
       </div>
     </div>
   );

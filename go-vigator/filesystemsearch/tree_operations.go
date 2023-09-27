@@ -123,9 +123,14 @@ func Encode(root *Folder) {
 	}
 }
 
+var RootNodeGlobal *Folder
+
 func BuildTree() *Folder {
-	rootFolder := newFolder("")
+	rootFolder := newFolder("C:")
 	visit := func(path string, info os.FileInfo, err error) error {
+		if strings.Contains(path, "AppData") || strings.Contains(path, "node_modules") {
+			return nil
+		}
 		segments := strings.Split(path, string(filepath.Separator))
 		if len(segments) == 1 && segments[0] == "" {
 			return nil
@@ -146,11 +151,15 @@ func BuildTree() *Folder {
 		return nil
 	}
 
-	err := cwalk.Walk("C:/", visit)
+	err := cwalk.Walk("C:\\", visit)
 	if err != nil {
 		fmt.Println(err)
 	}
 
 	Encode(rootFolder)
 	return rootFolder
+}
+func OnExit() {
+	//Encode(RootNodeGlobal)
+	fmt.Println("Written to file")
 }

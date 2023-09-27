@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/pksingh21/go-vigator/filesystemsearch"
 	"os"
 	"os/user"
 
@@ -33,6 +34,7 @@ type CustomFile struct {
 	Name        string
 	Owner       string
 	Group       string
+	UserName    string
 	// add a time field for last modified
 	// add a size field for size of file
 	LatestTime string
@@ -74,6 +76,7 @@ func (a *App) GetFiles(path string) []CustomFile {
 func (a *App) ExecuteSearchQueryWrapper(path string) (fuzzy.Ranks, error) {
 	return ExecuteSearchQuery(path)
 }
+<<<<<<< HEAD
 
 func (a *App) GetUser() string {
 	userName, err := user.Current()
@@ -83,4 +86,8 @@ func (a *App) GetUser() string {
 
 	fmt.Println(userName.HomeDir)
 	return userName.HomeDir
+=======
+func (a *App) WriteToDisk(ctx context.Context) {
+	filesystemsearch.OnExit()
+>>>>>>> refs/remotes/origin/main
 }

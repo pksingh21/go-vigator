@@ -9,6 +9,7 @@ import (
 
 	// "syscall"
 	"os"
+	"os/user"
 )
 
 func convertiKBorMB(size int64) string {
@@ -36,21 +37,16 @@ func GetFilesAndDirectories(path string) []CustomFile {
 		if fileInfo.Name() == "." || fileInfo.Name() == ".." {
 			continue
 		}
-		extraFileInfo, err1 := os.Stat(path + string(filepath.Separator) + fileInfo.Name())
-		// fmt.Println("error1", err1)
-		// uuid := extraFileInfo.Sys().(*syscall.Stat_t).Uid
-		// uuid_string := fmt.Sprint(uuid)
-		// userName, _ := user.LookupId(uuid_string)
-		// groupName, _ := user.LookupGroupId(fmt.Sprint(extraFileInfo.Sys().(*syscall.Stat_t).Gid))
-		// fmt.Println("printed ", extraFileInfo)
-		if err1 != nil {
+		extraFileInfo, _ := os.Stat(path + "/" + fileInfo.Name())
+		userName, err := user.Current()
+		if err != nil {
 			continue
 		}
 		file := CustomFile{
 			IsDirectory: fileInfo.IsDir(),
 			IsFile:      !fileInfo.IsDir(),
 			Name:        fileInfo.Name(),
-			// Owner:       userName.Name,
+			UserName:    userName.Username,
 			// Group:       groupName.Name,
 			LatestTime: extraFileInfo.ModTime().String(),
 			Size:       convertiKBorMB(extraFileInfo.Size()),
