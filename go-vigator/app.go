@@ -33,6 +33,7 @@ type CustomFile struct {
 	Name        string
 	Owner       string
 	Group       string
+	UserName    string
 	// add a time field for last modified
 	// add a size field for size of file
 	LatestTime string

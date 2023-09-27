@@ -8,6 +8,7 @@ import (
 
 	// "syscall"
 	"os"
+	"os/user"
 )
 
 func convertiKBorMB(size int64) string {
@@ -35,15 +36,15 @@ func GetFilesAndDirectories(path string) []CustomFile {
 			continue
 		}
 		extraFileInfo, _ := os.Stat(path + "/" + fileInfo.Name())
-		// uuid := extraFileInfo.Sys().(*syscall.Stat_t).Uid
-		// uuid_string := fmt.Sprint(uuid)
-		// userName, _ := user.LookupId(uuid_string)
-		// groupName, _ := user.LookupGroupId(fmt.Sprint(extraFileInfo.Sys().(*syscall.Stat_t).Gid))
+		userName, err := user.Current()
+		if err != nil {
+			continue
+		}
 		file := CustomFile{
 			IsDirectory: fileInfo.IsDir(),
 			IsFile:      !fileInfo.IsDir(),
 			Name:        fileInfo.Name(),
-			// Owner:       userName.Name,
+			UserName:    userName.Username,
 			// Group:       groupName.Name,
 			LatestTime: extraFileInfo.ModTime().String(),
 			Size:       convertiKBorMB(extraFileInfo.Size()),
