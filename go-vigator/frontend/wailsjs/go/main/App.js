@@ -26,6 +26,10 @@ export function GetFiles(arg1) {
   return window['go']['main']['App']['GetFiles'](arg1);
 }
 
+export function GetUser() {
+  return window['go']['main']['App']['GetUser']();
+}
+
 export function GoBackward() {
   return window['go']['main']['App']['GoBackward']();
 }
@@ -40,4 +44,8 @@ export function OpenFile(arg1) {
 
 export function PushToHistory(arg1) {
   return window['go']['main']['App']['PushToHistory'](arg1);
+}
+
+export function RenameFile(arg1, arg2, arg3) {
+  return window['go']['main']['App']['RenameFile'](arg1, arg2, arg3);
 }

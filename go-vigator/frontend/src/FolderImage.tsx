@@ -3,11 +3,24 @@ import JpgImg from "./assets/images/photo.png";
 import TxtImg from "./assets/images/txt.png";
 import PdfImg from "./assets/images/pdf.png";
 import ExeImg from "./assets/images/exe.png";
+import RarImg from "./assets/images/rar-icon.png"
+import VidImg from "./assets/images/video-icon.png"
+import WinImg from "./assets/images/winrar.svg"
 
 function FolderImage(props: { filename: string }) {
   if (props.filename.includes(".png") || props.filename.includes(".jpg")) {
     return (
       <img src={JpgImg} id={props.filename} className="rightPanelIcon"></img>
+    );
+  }
+  if (props.filename.includes(".zip") || props.filename.includes(".rar")) {
+    return (
+      <img src={WinImg} id={props.filename} className="rightPanelIcon"></img>
+    );
+  }
+  if (props.filename.includes(".avi") || props.filename.includes(".mp4")) {
+    return (
+      <img src={VidImg} id={props.filename} className="rightPanelIcon"></img>
     );
   }
   if (props.filename.includes(".txt") || props.filename[0] == ".") {

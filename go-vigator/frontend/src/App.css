@@ -226,10 +226,10 @@ a {
 .contextmenu {
   z-index: 2;
   position: absolute;
-  width: 205px;
+  width: 141px;
   display: flex;
   flex-direction: column;
-  border-radius: 1rem;
+  border-radius: 5px;
   animation: open 0.3s;
   transform-origin: top left;
   background: #272727c2;

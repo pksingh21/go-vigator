@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"os/user"
 
 	"github.com/lithammer/fuzzysearch/fuzzy"
 )
@@ -72,4 +73,14 @@ func (a *App) GetFiles(path string) []CustomFile {
 
 func (a *App) ExecuteSearchQueryWrapper(path string) (fuzzy.Ranks, error) {
 	return ExecuteSearchQuery(path)
+}
+
+func (a *App) GetUser() string {
+	userName, err := user.Current()
+	if err != nil {
+		return "error"
+	}
+
+	fmt.Println(userName.HomeDir)
+	return userName.HomeDir
 }

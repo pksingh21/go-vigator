@@ -154,3 +154,19 @@ func (a *App) CreateNewFile(path, fileName string) bool {
 	// File created successfully
 	return true
 }
+
+func (a *App) RenameFile(path string, curFileName string, newFileName string) bool {
+	// Construct the full paths for the current and new file names
+	curFilePath := path + "\\" + curFileName
+	newFilePath := path + "\\" + newFileName
+
+	// Rename the file
+	err := os.Rename(curFilePath, newFilePath)
+	if err != nil {
+		// Handle the error, e.g., log it or return false
+		// You might want to provide more specific error handling based on your application's needs.
+		return false
+	}
+
+	return true
+}

@@ -102,7 +102,8 @@ function RightPanel(props: DisplayFolderFilesProps) {
         .catch((err: any) => console.log("Couldn't delete the folder", err))
     }
     if (e.target.className === "Rename") {
-
+      setDialogTitle("Rename " + lastFolderContext)
+      setOpenedModal(true);
     }
     setFolderContext(false);
   };
