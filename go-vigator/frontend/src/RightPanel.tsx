@@ -31,12 +31,16 @@ function RightPanel(props: DisplayFolderFilesProps) {
   const [lPosition, setLPosition] = useState(0);
   const [tPosition, setTPosition] = useState(0);
   const [openedModal, setOpenedModal] = useState(false);
-  const dialogModal: any = useRef(null);
   const [dialogTitle, setDialogTitle] = useState("");
   const [lastFolderContext, setlastFolderContext] = useState("");
 
+  function removeConsecutiveBackslashes(inputString: string): string {
+    return inputString.replace(/\\+/g, "\\");
+  }
+
   function OperationOnFileOrDirectory(currentName: string, file: boolean) {
-    const fullPath = props.currentPath + currentName + "/";
+    let fullPath = props.currentPath + currentName + "\\";
+    // fullPath = removeConsecutiveBackslashes(fullPath)
     if (!file) {
       props.callUpdatePath(fullPath);
       PushToHistory(fullPath);
@@ -45,9 +49,6 @@ function RightPanel(props: DisplayFolderFilesProps) {
         .then(() => console.log("opened"))
         .catch((err) => window.alert(err));
   }
-
-
-
 
 
   const closeContextMenu = (e: any) => {
@@ -146,7 +147,7 @@ function RightPanel(props: DisplayFolderFilesProps) {
                 key={item.Name}
                 className="card"
               >
-                <FolderImage className="" filename={item.Name} />
+                <FolderImage className="" filename={item.Name} currentpath={props.currentPath} />
                 <p id={item.Name} className="Filenames">
                   {shortenLongString(item.Name, 11)}
                 </p>

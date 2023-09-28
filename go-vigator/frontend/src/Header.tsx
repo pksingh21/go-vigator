@@ -11,7 +11,9 @@ import {
 } from "../wailsjs/go/main/App";
 
 import Search from "antd/es/input/Search";
-
+function removeConsecutiveBackslashes(inputString: string): string {
+  return inputString.replace(/\\+/g, "\\");
+}
 function Header(props: {
   path: string;
   callUpdatePath: (newPath: string) => void

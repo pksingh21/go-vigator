@@ -22,6 +22,10 @@ export interface SearchResponse {
   Target: string
 }
 
+function removeConsecutiveBackslashes(inputString: string): string {
+  return inputString.replace(/\\+/g, "\\");
+}
+
 function App() {
   const [currentPath, setCurrentPath] = useState(""); // Get current directory (initial)
   const [files, setFiles] = useState<FileCustomType[]>([]);
@@ -39,6 +43,7 @@ function App() {
   }
 
   function UpdatePath(newPath: string) {
+
     setCurrentPath(newPath);
     // getFileInfo();
   }

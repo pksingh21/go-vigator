@@ -37,7 +37,7 @@ func GetFilesAndDirectories(path string) []CustomFile {
 		if fileInfo.Name() == "." || fileInfo.Name() == ".." {
 			continue
 		}
-		extraFileInfo, _ := os.Stat(path + "/" + fileInfo.Name())
+		// extraFileInfo, _ := os.Stat(path + "/" + fileInfo.Name())
 		userName, err := user.Current()
 		if err != nil {
 			continue
@@ -48,8 +48,8 @@ func GetFilesAndDirectories(path string) []CustomFile {
 			Name:        fileInfo.Name(),
 			UserName:    userName.Username,
 			// Group:       groupName.Name,
-			LatestTime: extraFileInfo.ModTime().String(),
-			Size:       convertiKBorMB(extraFileInfo.Size()),
+			// LatestTime: extraFileInfo.ModTime().String(),
+			// Size:       convertiKBorMB(extraFileInfo.Size()),
 		}
 
 		filesAndDirectories = append(filesAndDirectories, file)

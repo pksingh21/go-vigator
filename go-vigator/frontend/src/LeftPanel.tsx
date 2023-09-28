@@ -72,7 +72,7 @@ function LeftPanel(props: { callUpdatePath: (e: string) => void }) {
                   return UpdatePath(user + "\\Downloads\\");
                 }
                 if (element == "Home") {
-                  return UpdatePath(user + "");
+                  return UpdatePath(user + "\\");
                 }
                 if (element == "Music") {
                   return UpdatePath(user + "\\Music\\");

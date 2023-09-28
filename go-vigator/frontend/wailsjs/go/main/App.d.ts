@@ -15,6 +15,8 @@ export function GetCurrentDirectory():Promise<string>;
 
 export function GetFiles(arg1:string):Promise<Array<main.CustomFile>>;
 
+export function GetIcon(arg1:string,arg2:string):Promise<string>;
+
 export function GetUser():Promise<string>;
 
 export function GoBackward():Promise<string>;

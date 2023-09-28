@@ -6,6 +6,8 @@ require (
 	github.com/fsnotify/fsnotify v1.4.9
 	github.com/iafan/cwalk v0.0.0-20210125030640-586a8832a711
 	github.com/lithammer/fuzzysearch v1.1.5
+	github.com/lxn/walk v0.0.0-20210112085537-c389da54e794
+	github.com/lxn/win v0.0.0-20210218163916-a377121e959e
 	github.com/wailsapp/wails/v2 v2.6.0
 )
 
@@ -34,7 +36,8 @@ require (
 	golang.org/x/exp v0.0.0-20230522175609-2e198f4a06a1 // indirect
 	golang.org/x/net v0.10.0 // indirect
 	golang.org/x/sys v0.8.0 // indirect
-	golang.org/x/text v0.9.0 // indirect
+	golang.org/x/text v0.13.0 // indirect
+	gopkg.in/Knetic/govaluate.v3 v3.0.0 // indirect
 )
 
 // replace github.com/wailsapp/wails/v2 v2.5.1 => /home/pks/My Stuff 2.0/Coding/go/go-vigator

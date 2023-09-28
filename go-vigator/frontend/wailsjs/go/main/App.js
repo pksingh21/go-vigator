@@ -26,6 +26,10 @@ export function GetFiles(arg1) {
   return window['go']['main']['App']['GetFiles'](arg1);
 }
 
+export function GetIcon(arg1, arg2) {
+  return window['go']['main']['App']['GetIcon'](arg1, arg2);
+}
+
 export function GetUser() {
   return window['go']['main']['App']['GetUser']();
 }

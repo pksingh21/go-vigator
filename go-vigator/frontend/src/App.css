@@ -172,7 +172,7 @@ ul {
   justify-content: left;
   margin-left: 15px;
   row-gap: 25px;
-  column-gap: 32px;
+  column-gap: 24px;
   height: 95%;
   overflow-y: scroll;
   align-content: flex-start;
@@ -184,7 +184,7 @@ ul {
   max-width: 100px;
   justify-content: center;
   align-items: center;
-  padding: 13px 8px;
+  padding: 9px 7px;
   cursor: pointer;
   /* background-color: aliceblue; */
 }
@@ -221,7 +221,7 @@ a {
 .Filenames {
   inline-size: 93px;
   overflow-wrap: break-word;
-  margin-top: 8px;
+  margin-top: 1px;
 }
 
 
@@ -333,7 +333,7 @@ a {
 
 .Right {
   padding-left: 15px;
-  padding-right: 15px;
+  /* padding-right: 15px; */
   flex: 1;
   display: flex;
   flex-direction: column;
