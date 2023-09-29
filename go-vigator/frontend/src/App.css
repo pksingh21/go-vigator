@@ -38,6 +38,7 @@ body {
 
 .fbbuttons {
   width: 5%;
+  min-width: 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -75,7 +76,9 @@ body {
 }
 
 .search {
+  min-width: 100px;
   width: 10%;
+  margin-left: 3px;
   overflow: hidden;
   border-radius: 5px;
 }
@@ -120,6 +123,7 @@ ul {
 
 .left-panel {
   width: 200px;
+  min-width: 200px;
   font-size: small;
   background-color: #191919;
   overflow-x: auto;
@@ -332,16 +336,15 @@ a {
 
 
 .Right {
-  font-size: 14px;
-  padding-left: 15px;
+  font-size: 13px;
+  padding-left: 10px;
+  min-width: 400px;
   flex: 1;
   height: 100%;
   background-color: #191919;
-
   display: flex;
   flex-direction: column;
   row-gap: 5px;
-
 }
 
 .RightSearch {
@@ -350,6 +353,8 @@ a {
 
 .close {
   display: flex;
+  width: 100%;
+  min-width: 100%;
   justify-content: end;
   justify-content: space-between;
 }
@@ -375,6 +380,8 @@ a {
 
 .fileRow {
   column-gap: 13px;
+  width: 100%;
+  min-width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;

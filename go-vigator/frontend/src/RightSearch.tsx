@@ -1,7 +1,27 @@
 import { SearchResponse } from "./App";
 import FolderImage from "./FolderImage";
+import { OpenFile } from "../wailsjs/go/main/App";
+
+
+function removeConsecutiveBackslashes(inputString: string): string {
+    return inputString.replace(/\\+/g, "\\");
+}
 
 function RightSearch(props: { path: string, result: SearchResponse[], setIsSearched: React.Dispatch<React.SetStateAction<boolean>> }) {
+
+
+    function OperationOnFileOrDirectory(currentName: string) {
+        let fullPath = props.path + "\\" + currentName;
+        // fullPath = removeConsecutiveBackslashes(fullPath)
+        console.log(removeConsecutiveBackslashes(fullPath))
+        // remove the last character from the path
+        if (fullPath[fullPath.length - 1] == "\\") {
+            fullPath = fullPath.slice(0, -1);
+        }
+        OpenFile(fullPath)
+            .then(() => console.log("opened"))
+            .catch((err) => window.alert(err));
+    }
 
     return <>
         <div className="Right">
@@ -15,7 +35,11 @@ function RightSearch(props: { path: string, result: SearchResponse[], setIsSearc
             </div>
             <div className="RightSearch">
                 {props.result.map((val: SearchResponse) => {
-                    return <div className="fileRow">
+                    return <div className="fileRow"
+                        onDoubleClick={() => {
+                            OperationOnFileOrDirectory(val.Target.substring(1));
+                        }}
+                    >
                         <FolderImage className="serachFileIcon" filename={val.Target} currentpath={props.path} />
                         <div style={{ textAlign: "left" }}>{val.Target.substring(1)}</div>
                     </div>;
