@@ -1,2 +1,3 @@
 .*
 !/.gitignore
+./go-vigator/treeNew1.bin.gz
