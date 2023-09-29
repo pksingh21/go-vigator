@@ -45,6 +45,8 @@ function RightPanel(props: DisplayFolderFilesProps) {
       props.callUpdatePath(fullPath);
       PushToHistory(fullPath);
     } else
+    // remove the last character from the path
+      fullPath = fullPath.slice(0, -1);
       OpenFile(fullPath)
         .then(() => console.log("opened"))
         .catch((err) => window.alert(err));
@@ -93,14 +95,15 @@ function RightPanel(props: DisplayFolderFilesProps) {
   const closeFolderContextMenu = (e: any) => {
     e.stopPropagation();
     if (e.target.className === "Delete") {
-      DeleteFolder(props.currentPath, lastFolderContext)
-        .then((val: any) => {
-          // console.log("returned on delete ", val);
-          if (val) {
-            props.getFileInfo()
-          }
-        })
-        .catch((err: any) => console.log("Couldn't delete the folder", err))
+      console.log("deleting file not implemented yet")
+      // DeleteFolder(props.currentPath, lastFolderContext)
+      //   .then((val: any) => {
+      //     // console.log("returned on delete ", val);
+      //     if (val) {
+      //       props.getFileInfo()
+      //     }
+      //   })
+      //   .catch((err: any) => console.log("Couldn't delete the folder", err))
     }
     if (e.target.className === "Rename") {
       setDialogTitle("Rename " + lastFolderContext)
