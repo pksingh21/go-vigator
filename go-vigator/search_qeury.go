@@ -61,5 +61,6 @@ func ExecuteSearchQuery(query string, path string) (fuzzy.Ranks, error) {
 	if len(wordx) > 200 {
 		wordx = wordx[:200]
 	}
+	filesystemsearch.Encode(rootFolder)
 	return wordx, nil
 }

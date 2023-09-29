@@ -23,7 +23,7 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
     def on_any_event(self, event):
         # if the event contains a hidden directory in path then ignore it
         
-        if "\\." in event.src_path or "AppData" in event.src_path :
+        if "\\." in event.src_path or "AppData" in event.src_path or "Windows" in event.src_path :
             return
         if "\\." in event.src_path or "AppData" in event.src_path :
             return

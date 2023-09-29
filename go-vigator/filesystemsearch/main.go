@@ -4,6 +4,7 @@ import (
 	// "bufio"
 	"bufio"
 	"fmt"
+	"path/filepath"
 
 	// "path/filepath"
 
@@ -38,7 +39,8 @@ func walkFunc(path string, info os.FileInfo, err error) error {
 }
 
 func updateTree(rootNode *Folder) {
-	logFilePath := "C:\\Users\\Ankit\\Desktop\\code\\GoProjects\\filesearch\\go-vigator\\go-vigator\\filesystemsearch\\FileSystemChanges.log"
+	logFilePath := "C:\\Users\\DELL\\Desktop\\go-vigator\\go-vigator\\filesystemsearch\\FileSystemChanges.log"
+	logFilePath = filepath.Join(".","filesystemsearch","FileSystemChanges.log")
 	file, err := os.OpenFile(logFilePath, os.O_RDWR, 0644)
 	if err != nil {
 		log.Fatal(err)
@@ -165,7 +167,8 @@ func contains(slice []string, str string) bool {
 func Watch(rootNode *Folder) {
 	// check if FifleSystemChanges.log exists and if it's not zero then call the updateTree function
 	fmt.Println(os.Getwd())
-	logFilePath := "C:\\Users\\Ankit\\Desktop\\code\\GoProjects\\filesearch\\go-vigator\\go-vigator\\filesystemsearch\\FileSystemChanges.log"
+	logFilePath := "C:\\Users\\DELL\\Desktop\\go-vigator\\go-vigator\\filesystemsearch\\FileSystemChanges.log"
+	logFilePath = filepath.Join(".","filesystemsearch","FileSystemChanges.log")
 	fileInfo, err := os.Stat(logFilePath)
 	if err != nil {
 		log.Fatal(err, "huehue")
