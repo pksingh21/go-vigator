@@ -332,9 +332,12 @@ a {
 
 
 .Right {
+  font-size: 14px;
   padding-left: 15px;
-  /* padding-right: 15px; */
   flex: 1;
+  height: 100%;
+  background-color: #191919;
+
   display: flex;
   flex-direction: column;
   row-gap: 5px;
