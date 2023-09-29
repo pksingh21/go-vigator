@@ -16,15 +16,14 @@ function removeConsecutiveBackslashes(inputString: string): string {
 }
 function Header(props: {
   path: string;
-  callUpdatePath: (newPath: string) => void
-  setIsSearched: React.Dispatch<React.SetStateAction<boolean>>
-  setResult: React.Dispatch<React.SetStateAction<SearchResponse[]>>
+  callUpdatePath: (newPath: string) => void;
+  setIsSearched: React.Dispatch<React.SetStateAction<boolean>>;
+  setResult: React.Dispatch<React.SetStateAction<SearchResponse[]>>;
 }) {
   function updatePath(e: React.ChangeEvent<HTMLInputElement>) {
     props.callUpdatePath(e.target.value);
   }
   const [searchQuery, setSearchQuery] = useState("");
-
 
   return (
     <div className="header">
@@ -64,17 +63,27 @@ function Header(props: {
         <form
           onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
             e.preventDefault();
+            // get current time
+            let startTime = performance.now();
             ExecuteSearchQueryWrapper(searchQuery, props.path)
               .then((result) => {
                 console.log(result, "search results");
                 props.setIsSearched(true);
-                props.setResult(result)
+                props.setResult(result);
                 setSearchQuery("");
+                let endTime = performance.now();
+                let diff = endTime - startTime;
+                console.log("time taken ", diff);
               })
               .catch((err) => window.alert(err));
           }}
         >
-          <input type="text" placeholder="Search" onChange={(e) => setSearchQuery(e.target.value)} value={searchQuery} />
+          <input
+            type="text"
+            placeholder="Search"
+            onChange={(e) => setSearchQuery(e.target.value)}
+            value={searchQuery}
+          />
         </form>
       </div>
     </div>

@@ -46,7 +46,6 @@ func ExecuteSearchQuery(query string, path string) (fuzzy.Ranks, error) {
 	}
 	fmt.Println("Decoded tree in ", elapsed.Abs().Seconds(), " seconds")
 	Head = rootFolder
-	fmt.Println("Head", Head)
 	segments := strings.Split(path, string(filepath.Separator))
 
 	for i, segment := range segments {
@@ -55,7 +54,6 @@ func ExecuteSearchQuery(query string, path string) (fuzzy.Ranks, error) {
 			rootFolder = rootFolder.Folders[segment]
 		}
 	}
-	fmt.Println("Head after traversal ", Head)
 	go filesystemsearch.Watch(Head)
 
 	filesystemsearch.Path = []string{}
@@ -70,12 +68,12 @@ func ExecuteSearchQuery(query string, path string) (fuzzy.Ranks, error) {
 	sort.Sort(wordx)
 	elapsed = time.Since(start)
 	fmt.Println("Sort Time ", elapsed)
-	// fmt.Println("Search results generated in ", elapsed.Abs().Seconds(), " seconds")
+	fmt.Println("Search results generated in ", elapsed.Abs().Seconds(), " seconds")
 	if len(wordx) > 200 {
 		wordx = wordx[:200]
 	}
 	start = time.Now()
-	filesystemsearch.Encode(Head)
+	defer filesystemsearch.Encode(Head)
 	elapsed = time.Since(start)
 	fmt.Println("Encoded tree in ", elapsed.Abs().Seconds(), " seconds")
 	return wordx, nil
