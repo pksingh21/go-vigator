@@ -49,7 +49,7 @@ func ExecuteSearchQuery(query string, path string) (fuzzy.Ranks, error) {
 	segments := strings.Split(path, string(filepath.Separator))
 
 	for i, segment := range segments {
-		if i >= 1 && len(segment) > 0 {
+		if i >= 0 && len(segment) > 0 {
 			fmt.Println(segment)
 			rootFolder = rootFolder.Folders[segment]
 		}
@@ -57,6 +57,11 @@ func ExecuteSearchQuery(query string, path string) (fuzzy.Ranks, error) {
 	go filesystemsearch.Watch(Head)
 
 	filesystemsearch.Path = []string{}
+	fmt.Println("head files", Head.Files)
+	fmt.Println("head folders", Head.Folders)
+	fmt.Println("root folders", rootFolder.Folders)
+	fmt.Println("root folders", rootFolder.Name)
+	fmt.Println("root Files", rootFolder.Files)
 	rootFolder.String("", 0)
 	start = time.Now()
 	wordx := fuzzy.RankFindFold(query, filesystemsearch.Path)

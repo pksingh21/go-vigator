@@ -130,7 +130,8 @@ func Encode(root *Folder) {
 var RootNodeGlobal *Folder
 
 func BuildTree() *Folder {
-	rootFolder := newFolder("C:")
+	rootFolder := newFolder("")
+	var rootPath string
 	visit := func(path string, info os.FileInfo, err error) error {
 		if strings.Contains(path, "AppData") || strings.Contains(path, "node_modules") {
 			return nil
@@ -147,18 +148,29 @@ func BuildTree() *Folder {
 		}
 		if info != nil && info.IsDir() {
 			if len(segments) > 0 {
+				segments = append([]string{rootPath}, segments...)
+
 				rootFolder.addFolder(segments)
 			}
 		} else {
+
+			segments = append([]string{rootPath}, segments...)
 			rootFolder.addFile(segments)
 		}
 		return nil
 	}
 
-	err := cwalk.Walk("C:\\", visit)
-	if err != nil {
-		fmt.Println(err)
+	// err := cwalk.Walk("C:\\", visit)
+	for drive := 'A'; drive <= 'Z'; drive++ {
+		rootPath = string(drive) + ":"
+		err := cwalk.Walk(rootPath+"\\", visit)
+		if err != nil {
+			fmt.Println("error in drive ", rootPath, " is ", err)
+		}
 	}
+	// if err != nil {
+	// 	fmt.Println(err)
+	// }
 
 	Encode(rootFolder)
 	return rootFolder
