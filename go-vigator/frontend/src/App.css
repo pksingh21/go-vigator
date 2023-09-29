@@ -185,7 +185,8 @@ ul {
 .card {
   display: flex;
   flex-direction: column;
-  max-width: 100px;
+  max-width: 108px;
+  max-height: 107px;
   justify-content: center;
   align-items: center;
   padding: 9px 7px;
