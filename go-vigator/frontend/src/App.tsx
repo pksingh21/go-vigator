@@ -3,6 +3,8 @@ import { GetFiles, PushToHistory } from "../wailsjs/go/main/App";
 import RightPanel from "./RightPanel";
 import LeftPanel from "./LeftPanel";
 import Header from "./Header";
+import RightSearch from "./RightSearch";
+
 export interface FileCustomType {
   IsDirectory: boolean;
   IsFile: boolean;
@@ -13,14 +15,24 @@ export interface FileCustomType {
   Size: string;
 }
 
+export interface SearchResponse {
+  Distance: number
+  OriginalIndex: number
+  Source: string
+  Target: string
+}
+
+function removeConsecutiveBackslashes(inputString: string): string {
+  return inputString.replace(/\\+/g, "\\");
+}
+
 function App() {
-  const [resultText, setResultText] = useState(
-    "Please enter your name below 👇"
-  );
   const [currentPath, setCurrentPath] = useState(""); // Get current directory (initial)
   const [files, setFiles] = useState<FileCustomType[]>([]);
   const updateName = (e: string) => setCurrentPath(e);
-  const updateResultText = (result: string) => setResultText(result);
+  const [isSearched, setIsSearched] = useState(false);
+  const [result, setResult] = useState<SearchResponse[]>([]);
+
   const updateFiles = (result: FileCustomType[]) => {
     console.log(result, "result");
     setFiles(result);
@@ -31,31 +43,35 @@ function App() {
   }
 
   function UpdatePath(newPath: string) {
+
     setCurrentPath(newPath);
     // getFileInfo();
   }
 
   useEffect(() => {
     // GetCurrentDirectory().then(updateName);
-    updateName("C:/");
-    PushToHistory("C:/");
+    updateName("C:\\");
+    PushToHistory("C:\\");
   }, []);
   useEffect(() => {
     getFileInfo();
   }, [currentPath]);
 
+
+
   return (
     <div id="App">
       <div className="container">
-        <Header path={currentPath} callUpdatePath={UpdatePath} />
+        <Header path={currentPath} setIsSearched={setIsSearched} setResult={setResult} callUpdatePath={UpdatePath} />
         <div className="content">
           <LeftPanel callUpdatePath={UpdatePath} />
-          <RightPanel
+          {!isSearched && <RightPanel
             getFileInfo={getFileInfo}
             files={files}
             currentPath={currentPath}
             callUpdatePath={UpdatePath}
-          />
+          />}
+          {isSearched && <RightSearch path={currentPath} setIsSearched={setIsSearched} result={result} />}
         </div>
       </div>
     </div>

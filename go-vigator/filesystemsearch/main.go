@@ -38,7 +38,7 @@ func walkFunc(path string, info os.FileInfo, err error) error {
 }
 
 func updateTree(rootNode *Folder) {
-	logFilePath := "C:\\Users\\DELL\\Desktop\\go-vigator\\go-vigator\\filesystemsearch\\FileSystemChanges.log"
+	logFilePath := "C:\\Users\\Ankit\\Desktop\\code\\GoProjects\\filesearch\\go-vigator\\go-vigator\\filesystemsearch\\FileSystemChanges.log"
 	file, err := os.OpenFile(logFilePath, os.O_RDWR, 0644)
 	if err != nil {
 		log.Fatal(err)
@@ -165,10 +165,10 @@ func contains(slice []string, str string) bool {
 func Watch(rootNode *Folder) {
 	// check if FifleSystemChanges.log exists and if it's not zero then call the updateTree function
 	fmt.Println(os.Getwd())
-	logFilePath := "C:\\Users\\DELL\\Desktop\\go-vigator\\go-vigator\\filesystemsearch\\FileSystemChanges.log"
+	logFilePath := "C:\\Users\\Ankit\\Desktop\\code\\GoProjects\\filesearch\\go-vigator\\go-vigator\\filesystemsearch\\FileSystemChanges.log"
 	fileInfo, err := os.Stat(logFilePath)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal(err, "huehue")
 	}
 	if fileInfo.Size() > 0 {
 		updateTree(rootNode)
@@ -176,14 +176,14 @@ func Watch(rootNode *Folder) {
 
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal(err, "huehue 2 ")
 	}
 	defer watcher.Close()
 
 	// Add FileSystemChanges.log to the watcher
 	err = watcher.Add(logFilePath)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal(err, "huehue 3")
 	}
 
 	// Update the tree when changes are detected
@@ -193,10 +193,10 @@ func Watch(rootNode *Folder) {
 			if !ok {
 				return
 			}
-			if event.Name == "FileSystemChangx.log" && event.Op&fsnotify.Write == fsnotify.Write {
+			if event.Name == "FileSystemChanges.log" && event.Op&fsnotify.Write == fsnotify.Write {
 				fileInfo, err := os.Stat(logFilePath)
 				if err != nil {
-					log.Fatal(err)
+					log.Fatal(err, "huehue 4")
 				}
 				if fileInfo.Size() > 0 {
 					updateTree(rootNode)

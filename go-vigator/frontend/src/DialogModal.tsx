@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { CreateNewFile, CreateNewFolder } from "../wailsjs/go/main/App";
+import { CreateNewFile, CreateNewFolder, RenameFile } from "../wailsjs/go/main/App";
 
 function DialogModal(props: { closeModal: (e: any) => void, openedModal: any, getFileInfo: any, setOpenedModal: any, Title: any, path: any }) {
     const dialogModal: any = useRef(null);
@@ -25,6 +25,7 @@ function DialogModal(props: { closeModal: (e: any) => void, openedModal: any, ge
                     console.log("Created : ");
                     props.closeModal(e);
                     props.getFileInfo();
+                    inputModal.current.value = "";
                 }
                 else {
                     console.log("Fail: ");
@@ -39,6 +40,7 @@ function DialogModal(props: { closeModal: (e: any) => void, openedModal: any, ge
                     console.log("Created : ");
                     props.closeModal(e);
                     props.getFileInfo();
+                    inputModal.current.value = "";
                 }
                 else {
                     console.log("Fail: ");
@@ -46,8 +48,14 @@ function DialogModal(props: { closeModal: (e: any) => void, openedModal: any, ge
                 }
             }).catch(() => { setisError(true); })
         }
-        if (props.Title == "Refresh") {
-
+        if (props.Title.substring(0, 6) == "Rename") {
+            RenameFile(props.path, props.Title.substring(7), inputModal.current.value).then((val: boolean) => {
+                if (val) {
+                    props.closeModal(e);
+                    props.getFileInfo();
+                    inputModal.current.value = "";
+                }
+            }).catch()
         }
     }
 

@@ -6,14 +6,14 @@ import MusicImg from "./assets/images/Music.ico";
 import VidoesImg from "./assets/images/Videos.ico";
 import PictureImg from "./assets/images/Photos.ico";
 import DocumentsImg from "./assets/images/Documents.ico";
-
+import { GetUser } from "../wailsjs/go/main/App"
 
 import "./App.css";
 
 function LeftPanel(props: { callUpdatePath: (e: string) => void }) {
   function UpdatePath(path: string) {
     if (path == "Home") props.callUpdatePath("C:/");
-    else props.callUpdatePath("C:/" + path);
+    else props.callUpdatePath(path);
   }
   const leftPanelElement = [
     "Home",
@@ -50,6 +50,13 @@ function LeftPanel(props: { callUpdatePath: (e: string) => void }) {
 
   }
 
+  let user = "";
+  GetUser().then((val: string) => {
+    if (val != "error") {
+      user = val;
+    }
+  }).catch();
+
   return (
     <div className="left-panel">
       <ul className="mainFolders">
@@ -59,7 +66,29 @@ function LeftPanel(props: { callUpdatePath: (e: string) => void }) {
               key={element}
               onClick={(e) => {
                 e.preventDefault();
-                UpdatePath(element);
+
+                // UpdatePath(element);
+                if (element == "Downloads") {
+                  return UpdatePath(user + "\\Downloads\\");
+                }
+                if (element == "Home") {
+                  return UpdatePath(user + "\\");
+                }
+                if (element == "Music") {
+                  return UpdatePath(user + "\\Music\\");
+                }
+                if (element == "Pictures") {
+                  return UpdatePath(user + "\\Gallery\\");
+                }
+                if (element == "Desktop") {
+                  return UpdatePath(user + "\\Desktop\\");
+                }
+                if (element == "Documents") {
+                  return UpdatePath(user + "\\Documents\\");
+                }
+                if (element == "Videos") {
+                  return UpdatePath("C:\\Videos\\");
+                }
               }}
             >
               <img src={IconFetch(element)} className="leftPanelIcon"></img>

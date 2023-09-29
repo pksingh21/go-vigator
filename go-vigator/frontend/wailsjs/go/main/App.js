@@ -14,8 +14,8 @@ export function DeleteFolder(arg1, arg2) {
   return window['go']['main']['App']['DeleteFolder'](arg1, arg2);
 }
 
-export function ExecuteSearchQueryWrapper(arg1) {
-  return window['go']['main']['App']['ExecuteSearchQueryWrapper'](arg1);
+export function ExecuteSearchQueryWrapper(arg1, arg2) {
+  return window['go']['main']['App']['ExecuteSearchQueryWrapper'](arg1, arg2);
 }
 
 export function GetCurrentDirectory() {
@@ -24,6 +24,14 @@ export function GetCurrentDirectory() {
 
 export function GetFiles(arg1) {
   return window['go']['main']['App']['GetFiles'](arg1);
+}
+
+export function GetIcon(arg1, arg2) {
+  return window['go']['main']['App']['GetIcon'](arg1, arg2);
+}
+
+export function GetUser() {
+  return window['go']['main']['App']['GetUser']();
 }
 
 export function GoBackward() {
@@ -40,4 +48,8 @@ export function OpenFile(arg1) {
 
 export function PushToHistory(arg1) {
   return window['go']['main']['App']['PushToHistory'](arg1);
+}
+
+export function RenameFile(arg1, arg2, arg3) {
+  return window['go']['main']['App']['RenameFile'](arg1, arg2, arg3);
 }

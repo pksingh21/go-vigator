@@ -5,6 +5,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
+	"strings"
 
 	// "syscall"
 	"os"
@@ -26,6 +27,7 @@ func convertiKBorMB(size int64) string {
 
 func GetFilesAndDirectories(path string) []CustomFile {
 	var filesAndDirectories []CustomFile
+	// fmt.Println(path)
 	fileInfos, err := os.ReadDir(path)
 	if err != nil {
 		return nil
@@ -35,7 +37,7 @@ func GetFilesAndDirectories(path string) []CustomFile {
 		if fileInfo.Name() == "." || fileInfo.Name() == ".." {
 			continue
 		}
-		extraFileInfo, _ := os.Stat(path + "/" + fileInfo.Name())
+		// extraFileInfo, _ := os.Stat(path + "/" + fileInfo.Name())
 		userName, err := user.Current()
 		if err != nil {
 			continue
@@ -46,9 +48,10 @@ func GetFilesAndDirectories(path string) []CustomFile {
 			Name:        fileInfo.Name(),
 			UserName:    userName.Username,
 			// Group:       groupName.Name,
-			LatestTime: extraFileInfo.ModTime().String(),
-			Size:       convertiKBorMB(extraFileInfo.Size()),
+			// LatestTime: extraFileInfo.ModTime().String(),
+			// Size:       convertiKBorMB(extraFileInfo.Size()),
 		}
+
 		filesAndDirectories = append(filesAndDirectories, file)
 	}
 
@@ -56,11 +59,9 @@ func GetFilesAndDirectories(path string) []CustomFile {
 }
 
 func (a *App) OpenFile(filePath string) error {
-	// exec handled by OS and not by a separate go routine or thread
-	// it is async as well so we can add a cursor rotation if we want while it is opening
-	fmt.Println(filePath)
+	// fmt.Println(filePath," file path")
 	var cmd *exec.Cmd
-	// cmd = exec.Command("start", filePath)
+
 	switch runtime.GOOS {
 	case "darwin":
 		// macOS
@@ -70,13 +71,20 @@ func (a *App) OpenFile(filePath string) error {
 		cmd = exec.Command("xdg-open", filePath)
 	case "windows":
 		// Windows
-		cmd = exec.Command("cmd.exe", "/C", "start", filePath)
+		filePath = strings.TrimRight(filePath, "/") // Remove trailing backslashes
+		// filePath = "'" + filePath + "'"
+		// fmt.Println(filePath, "formatted file path")
+
+		// ok := "C:\\Users\\Ankit\\Downloads\\20CS01058_A3-document.pdf"
+		ok1 := strings.ReplaceAll(filePath, "/", "\\")
+		// fmt.Println(ok, ok1, "lmao")
+		cmd = exec.Command("cmd.exe", "/c", ok1)
 	default:
 		return fmt.Errorf("unsupported operating system")
 	}
 
-	// Execute the command to open the file.
 	if err := cmd.Run(); err != nil {
+		fmt.Println(err, "something went wrong trying to open the file")
 		return err
 	}
 
@@ -140,5 +148,21 @@ func (a *App) CreateNewFile(path, fileName string) bool {
 	defer file.Close()
 
 	// File created successfully
+	return true
+}
+
+func (a *App) RenameFile(path string, curFileName string, newFileName string) bool {
+	// Construct the full paths for the current and new file names
+	curFilePath := path + "\\" + curFileName
+	newFilePath := path + "\\" + newFileName
+
+	// Rename the file
+	err := os.Rename(curFilePath, newFilePath)
+	if err != nil {
+		// Handle the error, e.g., log it or return false
+		// You might want to provide more specific error handling based on your application's needs.
+		return false
+	}
+
 	return true
 }

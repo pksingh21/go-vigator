@@ -9,11 +9,15 @@ export function CreateNewFolder(arg1:string,arg2:string):Promise<boolean>;
 
 export function DeleteFolder(arg1:string,arg2:string):Promise<boolean>;
 
-export function ExecuteSearchQueryWrapper(arg1:string):Promise<fuzzy.Ranks>;
+export function ExecuteSearchQueryWrapper(arg1:string,arg2:string):Promise<fuzzy.Ranks>;
 
 export function GetCurrentDirectory():Promise<string>;
 
 export function GetFiles(arg1:string):Promise<Array<main.CustomFile>>;
+
+export function GetIcon(arg1:string,arg2:string):Promise<string>;
+
+export function GetUser():Promise<string>;
 
 export function GoBackward():Promise<string>;
 
@@ -22,3 +26,5 @@ export function GoForward():Promise<string>;
 export function OpenFile(arg1:string):Promise<void>;
 
 export function PushToHistory(arg1:string):Promise<void>;
+
+export function RenameFile(arg1:string,arg2:string,arg3:string):Promise<boolean>;
