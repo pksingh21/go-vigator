@@ -19,6 +19,7 @@ func ExecuteSearchQuery(query string, path string) (fuzzy.Ranks, error) {
 
 	start := time.Now()
 	var rootFolder *filesystemsearch.Folder
+	var Head *filesystemsearch.Folder
 	file, err := os.Open("treeNew1.bin.gz")
 	if err != nil {
 		fmt.Println("Error opening file:", err)
@@ -44,6 +45,8 @@ func ExecuteSearchQuery(query string, path string) (fuzzy.Ranks, error) {
 		return fuzzy.Ranks{}, err
 	}
 	fmt.Println("Decoded tree in ", elapsed.Abs().Seconds(), " seconds")
+	Head = rootFolder
+	fmt.Println("Head", Head)
 	segments := strings.Split(path, string(filepath.Separator))
 
 	for i, segment := range segments {
@@ -52,20 +55,27 @@ func ExecuteSearchQuery(query string, path string) (fuzzy.Ranks, error) {
 			rootFolder = rootFolder.Folders[segment]
 		}
 	}
-	go filesystemsearch.Watch(rootFolder)
+	fmt.Println("Head after traversal ", Head)
+	go filesystemsearch.Watch(Head)
+
 	filesystemsearch.Path = []string{}
 	rootFolder.String("", 0)
 	start = time.Now()
 	wordx := fuzzy.RankFindFold(query, filesystemsearch.Path)
-	elapsed = time.Since(start)
 	fmt.Println("Path Array built with length ", len(filesystemsearch.Path))
+	elapsed = time.Since(start)
+	fmt.Println("Rank Find", elapsed)
+
+	start = time.Now()
 	sort.Sort(wordx)
-	fmt.Println("Search results generated in ", elapsed.Abs().Seconds(), " seconds")
+	elapsed = time.Since(start)
+	fmt.Println("Sort Time ", elapsed)
+	// fmt.Println("Search results generated in ", elapsed.Abs().Seconds(), " seconds")
 	if len(wordx) > 200 {
 		wordx = wordx[:200]
 	}
 	start = time.Now()
-	filesystemsearch.Encode(rootFolder)
+	filesystemsearch.Encode(Head)
 	elapsed = time.Since(start)
 	fmt.Println("Encoded tree in ", elapsed.Abs().Seconds(), " seconds")
 	return wordx, nil
