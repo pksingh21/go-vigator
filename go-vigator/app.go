@@ -149,6 +149,8 @@ func (a *App) GetIcon(folderPath string, fileName string) (string, error) {
 	mu.Lock()
 	defer mu.Unlock()
 
+	win.CoUninitialize()
+
 	fullpath := filepath.Join(folderPath, fileName)
 	psfi := &win.SHFILEINFO{}
 	fileInfoFlags := win.SHGFI_ICON | win.SHGFI_DISPLAYNAME
@@ -157,7 +159,7 @@ func (a *App) GetIcon(folderPath string, fileName string) (string, error) {
 		return "", err
 	}
 
-	ret := win.SHGetFileInfo(
+	_ = win.SHGetFileInfo(
 		pszPath,
 		0,
 		psfi,
@@ -165,9 +167,9 @@ func (a *App) GetIcon(folderPath string, fileName string) (string, error) {
 		uint32(fileInfoFlags),
 	)
 
-	if ret == 0 {
-		return "", fmt.Errorf("SHGetFileInfo failed")
-	}
+	// if ret == 0 {
+	// 	return "", fmt.Errorf("SHGetFileInfo failed")
+	// }
 
 	icon := uintptr(psfi.HIcon)
 	defer win.DestroyIcon(win.HICON(icon)) // Clean up the icon resource when the function exits.

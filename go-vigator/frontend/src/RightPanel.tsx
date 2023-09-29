@@ -41,15 +41,20 @@ function RightPanel(props: DisplayFolderFilesProps) {
   function OperationOnFileOrDirectory(currentName: string, file: boolean) {
     let fullPath = props.currentPath + currentName + "\\";
     // fullPath = removeConsecutiveBackslashes(fullPath)
+    console.log(file, currentName)
     if (!file) {
+      // console.log("Open directory called ");
       props.callUpdatePath(fullPath);
       PushToHistory(fullPath);
-    } else
-    // remove the last character from the path
-      fullPath = fullPath.slice(0, -1);
+    } else {
+      // remove the last character from the path
+      if (fullPath[fullPath.length - 1] == "\\") {
+        fullPath = fullPath.slice(0, -1);
+      }
       OpenFile(fullPath)
         .then(() => console.log("opened"))
         .catch((err) => window.alert(err));
+    }
   }
 
 
@@ -82,28 +87,19 @@ function RightPanel(props: DisplayFolderFilesProps) {
     setVis(true)
   };
 
-  const openFolderContextMenu = (e: any) => {
-    e.preventDefault();
-    e.stopPropagation();
-    closeContextMenu(e);
-    setlastFolderContext(e.target.id);
-    setLPosition(e.clientX)
-    setTPosition(e.clientY)
-    setFolderContext(true)
-  };
-
   const closeFolderContextMenu = (e: any) => {
     e.stopPropagation();
     if (e.target.className === "Delete") {
       console.log("deleting file not implemented yet")
-      // DeleteFolder(props.currentPath, lastFolderContext)
-      //   .then((val: any) => {
-      //     // console.log("returned on delete ", val);
-      //     if (val) {
-      //       props.getFileInfo()
-      //     }
-      //   })
-      //   .catch((err: any) => console.log("Couldn't delete the folder", err))
+      console.log(props.currentPath, lastFolderContext)
+      DeleteFolder(props.currentPath, lastFolderContext)
+        .then((val: any) => {
+          // console.log("returned on delete ", val);
+          if (val) {
+            props.getFileInfo()
+          }
+        })
+        .catch((err: any) => console.log("Couldn't delete the folder", err))
     }
     if (e.target.className === "Rename") {
       setDialogTitle("Rename " + lastFolderContext)
@@ -137,12 +133,21 @@ function RightPanel(props: DisplayFolderFilesProps) {
           props.files.map((item) => {
             return (
               <div
-                onContextMenu={openFolderContextMenu}
+                onContextMenu={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  closeContextMenu(e);
+                  setlastFolderContext(item.Name);
+                  console.log(lastFolderContext);
+                  setLPosition(e.clientX)
+                  setTPosition(e.clientY)
+                  setFolderContext(true)
+                }}
                 onDoubleClick={() => {
                   OperationOnFileOrDirectory(item.Name, item.IsFile);
                 }}
                 onClick={(e) => {
-                  // closeFolderContextMenu(e);
+                  closeFolderContextMenu(e);
                   setName(item.Name);
                   console.log("on click clicked", item.Name);
                 }}
