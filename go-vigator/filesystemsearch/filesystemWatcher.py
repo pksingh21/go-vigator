@@ -15,7 +15,7 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
         )
         self.logger = logging.getLogger('FileSystemChangx')
         self.logger.setLevel(logging.INFO)
-        log_file_path = 'FileSystemChanges.log'
+        log_file_path = f'C:\\Users\\{os.getlogin()}\\FileSystemChanges.log'
         handler = logging.FileHandler(log_file_path)
         handler.setFormatter(logging.Formatter('%(asctime)s - %(message)s'))
         self.logger.addHandler(handler)

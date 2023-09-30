@@ -57,11 +57,6 @@ func ExecuteSearchQuery(query string, path string) (fuzzy.Ranks, error) {
 	go filesystemsearch.Watch(Head)
 
 	filesystemsearch.Path = []string{}
-	fmt.Println("head files", Head.Files)
-	fmt.Println("head folders", Head.Folders)
-	fmt.Println("root folders", rootFolder.Folders)
-	fmt.Println("root folders", rootFolder.Name)
-	fmt.Println("root Files", rootFolder.Files)
 	rootFolder.String("", 0)
 	start = time.Now()
 	wordx := fuzzy.RankFindFold(query, filesystemsearch.Path)
